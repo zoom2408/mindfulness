@@ -481,6 +481,93 @@
   .cat-btn:hover { background: rgba(96,165,250,0.1); color: white; }
   .cat-btn.active { background: var(--blue-600); color: white; border-color: var(--blue-500); }
 
+  /* ===== BREATH TECHNIQUE CARDS ===== */
+  .breath-tech-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(96,165,250,0.15);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin: 12px 0;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .breath-tech-card:hover {
+    border-color: rgba(96,165,250,0.35);
+    background: rgba(255,255,255,0.06);
+  }
+  .breath-tech-header {
+    display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px;
+  }
+  .breath-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    color: rgba(96,165,250,0.3);
+    line-height: 1; min-width: 32px;
+    padding-top: 2px;
+  }
+  .breath-name {
+    font-weight: 700; font-size: 1rem; color: white; margin-bottom: 6px;
+  }
+  .breath-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .btag {
+    padding: 3px 10px; border-radius: 99px; font-size: 0.72rem; font-weight: 600;
+  }
+  .btag-level { background: rgba(37,99,235,0.2); color: var(--blue-300); border: 1px solid rgba(96,165,250,0.25); }
+  .btag-effect { background: rgba(20,184,166,0.12); color: #5eead4; border: 1px solid rgba(94,234,212,0.2); }
+
+  .breath-desc {
+    font-size: 0.9rem; line-height: 1.7; color: var(--blue-100);
+    margin-bottom: 14px;
+  }
+  .breath-steps {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;
+  }
+  .step-pill {
+    padding: 4px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+    background: rgba(30,77,191,0.25); color: var(--blue-300);
+    border: 1px solid rgba(96,165,250,0.2);
+    white-space: nowrap;
+  }
+
+  /* YouTube link button */
+  .yt-link {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(220,38,38,0.08);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .yt-link:hover {
+    background: rgba(220,38,38,0.15);
+    border-color: rgba(239,68,68,0.45);
+    transform: translateY(-1px);
+  }
+  .yt-icon {
+    width: 34px; height: 34px; min-width: 34px;
+    background: #ef4444;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: white;
+    box-shadow: 0 2px 8px rgba(239,68,68,0.35);
+  }
+  .yt-text {
+    display: flex; flex-direction: column; gap: 2px; flex: 1;
+  }
+  .yt-label {
+    font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase;
+    color: #fca5a5; font-weight: 700;
+  }
+  .yt-title {
+    font-size: 0.88rem; color: white; font-weight: 500; line-height: 1.3;
+  }
+  .yt-arrow {
+    color: #fca5a5; font-size: 1.1rem; opacity: 0.7;
+  }
+  .yt-link:hover .yt-arrow { opacity: 1; }
+
   /* ===== ESSAY SECTION ===== */
   .essay-intro {
     background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(37,99,235,0.12));
@@ -853,12 +940,123 @@
             <p>Hơi thở là "cửa ngõ" dễ tiếp cận nhất để can thiệp vào hệ thần kinh tự động. Thở chậm, sâu → kích hoạt hệ đối giao cảm → thư giãn. Thở nhanh, nông → kích hoạt giao cảm → tỉnh táo/lo âu. Quan hệ hai chiều: hơi thở phản ánh VÀ tác động lại hệ thần kinh.</p>
           </div>
           <div class="section-label">Nhóm Kỹ Thuật Thở Làm Dịu (Calming / Parasympathetic)</div>
-          <ul class="kw-list">
-            <li><strong>Thở bụng (Diaphragmatic Breathing)</strong>: Hít vào đẩy bụng phồng, thở ra bụng xẹp. Tay đặt lên bụng để cảm nhận. Kích hoạt hệ đối giao cảm.</li>
-            <li><strong>Thở luân phiên – Nadi Shodhana</strong>: Dùng ngón cái & ngón áp út bịt lần lượt từng lỗ mũi. Cân bằng hai bán cầu não, tạo trạng thái trung tính.</li>
-            <li><strong>Thở 4 thì (Box Breathing)</strong>: Hít vào 4s → Giữ 4s → Thở ra 4s → Giữ 4s. Giảm lo âu, tăng tập trung.</li>
-            <li><strong>4-7-8 Breathing</strong>: Hít vào 4s → Giữ 7s → Thở ra 8s. Thì thở ra dài kích hoạt dây thần kinh phế vị.</li>
-          </ul>
+
+          <!-- Technique 1 -->
+          <div class="breath-tech-card">
+            <div class="breath-tech-header">
+              <div class="breath-num">01</div>
+              <div>
+                <div class="breath-name">Thở Bụng (Diaphragmatic Breathing)</div>
+                <div class="breath-tags">
+                  <span class="btag btag-level">🟢 Cơ bản nhất</span>
+                  <span class="btag btag-effect">Kích hoạt đối giao cảm</span>
+                </div>
+              </div>
+            </div>
+            <p class="breath-desc">Hít vào đẩy bụng phồng, thở ra bụng xẹp. Đặt một tay lên ngực, một tay lên bụng để cảm nhận chuyển động. Thở chậm và đều bằng mũi.</p>
+            <div class="breath-steps">
+              <span class="step-pill">Hít vào 4s · bụng nở</span>
+              <span class="step-pill">Thở ra 6s · bụng xẹp</span>
+              <span class="step-pill">Lặp 5–10 phút</span>
+            </div>
+            <a class="yt-link" href="https://www.youtube.com/watch?v=kgTL5G1ibIo" target="_blank" rel="noopener">
+              <span class="yt-icon">▶</span>
+              <span class="yt-text">
+                <span class="yt-label">Xem minh họa</span>
+                <span class="yt-title">Diaphragmatic Breathing Exercise – Cleveland Clinic</span>
+              </span>
+              <span class="yt-arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Technique 2 -->
+          <div class="breath-tech-card">
+            <div class="breath-tech-header">
+              <div class="breath-num">02</div>
+              <div>
+                <div class="breath-name">Thở Luân Phiên – Nadi Shodhana</div>
+                <div class="breath-tags">
+                  <span class="btag btag-level">🟡 Trung cấp</span>
+                  <span class="btag btag-effect">Cân bằng hai bán cầu não</span>
+                </div>
+              </div>
+            </div>
+            <p class="breath-desc">Dùng ngón cái & ngón áp út bịt lần lượt từng lỗ mũi. Hít qua lỗ mũi trái → đổi → thở ra qua phải → hít qua phải → đổi → thở ra qua trái. Tạo trạng thái tâm trí trung tính, cân bằng.</p>
+            <div class="breath-steps">
+              <span class="step-pill">Hít trái 4s</span>
+              <span class="step-pill">Đổi → Thở ra phải 4s</span>
+              <span class="step-pill">Hít phải 4s</span>
+              <span class="step-pill">Đổi → Thở ra trái 4s</span>
+              <span class="step-pill">5–10 vòng</span>
+            </div>
+            <a class="yt-link" href="https://www.youtube.com/watch?v=8VwufJrUhic" target="_blank" rel="noopener">
+              <span class="yt-icon">▶</span>
+              <span class="yt-text">
+                <span class="yt-label">Xem minh họa</span>
+                <span class="yt-title">Nadi Shodhana Pranayama – Yoga With Adriene</span>
+              </span>
+              <span class="yt-arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Technique 3 -->
+          <div class="breath-tech-card">
+            <div class="breath-tech-header">
+              <div class="breath-num">03</div>
+              <div>
+                <div class="breath-name">Thở Hộp (Box Breathing)</div>
+                <div class="breath-tags">
+                  <span class="btag btag-level">🟢 Dễ nhớ</span>
+                  <span class="btag btag-effect">Giảm lo âu · Tăng tập trung</span>
+                </div>
+              </div>
+            </div>
+            <p class="breath-desc">Kỹ thuật 4 thì đều nhau, hình dung như vẽ 4 cạnh của một hình vuông. Được dùng nhiều trong quân đội Mỹ (Navy SEALs) để kiểm soát stress cao độ tức thì.</p>
+            <div class="breath-steps">
+              <span class="step-pill">Hít vào 4s</span>
+              <span class="step-pill">Giữ 4s</span>
+              <span class="step-pill">Thở ra 4s</span>
+              <span class="step-pill">Giữ 4s</span>
+              <span class="step-pill">Lặp 4 vòng</span>
+            </div>
+            <a class="yt-link" href="https://www.youtube.com/watch?v=tEmt1Znux58" target="_blank" rel="noopener">
+              <span class="yt-icon">▶</span>
+              <span class="yt-text">
+                <span class="yt-label">Xem minh họa</span>
+                <span class="yt-title">Box Breathing Relaxation Technique – How to do it</span>
+              </span>
+              <span class="yt-arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Technique 4 -->
+          <div class="breath-tech-card">
+            <div class="breath-tech-header">
+              <div class="breath-num">04</div>
+              <div>
+                <div class="breath-name">Thở 4-7-8 (4-7-8 Breathing)</div>
+                <div class="breath-tags">
+                  <span class="btag btag-level">🟠 Mạnh nhất</span>
+                  <span class="btag btag-effect">Kích hoạt vagus nerve · Hỗ trợ giấc ngủ</span>
+                </div>
+              </div>
+            </div>
+            <p class="breath-desc">Thì thở ra (8s) dài hơn hít vào (4s) kích hoạt dây thần kinh phế vị (vagus nerve), tăng vagal tone, giảm lo âu mạnh. Đặc biệt hiệu quả trước khi ngủ hoặc khi lo âu cao.</p>
+            <div class="breath-steps">
+              <span class="step-pill">Hít vào mũi 4s</span>
+              <span class="step-pill">Giữ hơi 7s</span>
+              <span class="step-pill">Thở ra miệng 8s</span>
+              <span class="step-pill">Lặp 4 lần</span>
+            </div>
+            <a class="yt-link" href="https://www.youtube.com/watch?v=YRPh_GaiL8s" target="_blank" rel="noopener">
+              <span class="yt-icon">▶</span>
+              <span class="yt-text">
+                <span class="yt-label">Xem minh họa</span>
+                <span class="yt-title">4-7-8 Breathing Technique – Dr. Andrew Weil</span>
+              </span>
+              <span class="yt-arrow">↗</span>
+            </a>
+          </div>
           <div class="key-concept">
             <strong>Dây Thần Kinh Phế Vị (Vagus Nerve)</strong>
             <p>Hơi thở chậm với thì thở ra dài hơn → tăng vagal tone → cải thiện điều hòa cảm xúc, giảm phản ứng sợ hãi (Porges, 2011). Đây là cơ chế sinh học của Relaxation Response (Benson, 1975).</p>
