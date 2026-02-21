@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chánh Niệm & Yoga – Ôn Tập & Wiki</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-950: #0c1a3a;
+    --blue-900: #0f2356;
+    --blue-800: #1a3a7e;
+    --blue-700: #1e4dbf;
+    --blue-600: #2563eb;
+    --blue-500: #3b82f6;
+    --blue-400: #60a5fa;
+    --blue-300: #93c5fd;
+    --blue-100: #dbeafe;
+    --blue-50: #eff6ff;
+    --gold: #f0c040;
+    --white: #ffffff;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-500: #64748b;
+    --gray-700: #334155;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --correct-bg: #dcfce7;
+    --wrong-bg: #fee2e2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blue-950);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-950) 0%, var(--blue-900) 50%, #0a2060 100%);
+    padding: 60px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(96,165,250,0.2);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(37,99,235,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 20%, rgba(96,165,250,0.1) 0%, transparent 50%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(96,165,250,0.15);
+    border: 1px solid rgba(96,165,250,0.4);
+    color: var(--blue-300);
+    padding: 6px 18px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    position: relative;
+    background: linear-gradient(135deg, #ffffff 0%, var(--blue-300) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: var(--blue-300);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+    position: relative;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--blue-300); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ===== NAV TABS ===== */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    background: var(--blue-900);
+    border-bottom: 1px solid rgba(96,165,250,0.15);
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+  .tab-btn {
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: 1px solid rgba(96,165,250,0.3);
+    background: transparent;
+    color: var(--blue-300);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { background: rgba(96,165,250,0.1); color: white; }
+  .tab-btn.active {
+    background: var(--blue-600);
+    color: white;
+    border-color: var(--blue-500);
+    box-shadow: 0 0 16px rgba(59,130,246,0.4);
+  }
+
+  /* ===== MAIN ===== */
+  .main { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ===== WIKI ===== */
+  .wiki-intro {
+    background: rgba(30,77,191,0.15);
+    border: 1px solid rgba(96,165,250,0.2);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+  .wiki-intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--blue-300);
+  }
+  .wiki-intro p { color: var(--blue-300); line-height: 1.7; font-size: 0.95rem; }
+
+  .wiki-grid { display: grid; gap: 20px; }
+  .wiki-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(96,165,250,0.18);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .wiki-card:hover { border-color: rgba(96,165,250,0.5); transform: translateY(-2px); }
+  .wiki-card-header {
+    background: linear-gradient(135deg, rgba(37,99,235,0.3), rgba(30,77,191,0.2));
+    padding: 20px 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .wiki-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .wiki-icon {
+    width: 40px; height: 40px;
+    background: rgba(96,165,250,0.15);
+    border: 1px solid rgba(96,165,250,0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .wiki-card-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+  }
+  .wiki-card-header p { font-size: 0.8rem; color: var(--blue-300); margin-top: 3px; }
+  .wiki-chevron { color: var(--blue-400); font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
+  .wiki-card.open .wiki-chevron { transform: rotate(180deg); }
+  .wiki-body {
+    display: none;
+    padding: 0 24px 24px;
+  }
+  .wiki-card.open .wiki-body { display: block; }
+
+  .key-concept {
+    background: rgba(37,99,235,0.1);
+    border-left: 3px solid var(--blue-500);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .key-concept strong { color: var(--blue-300); display: block; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .key-concept p { color: var(--gray-100); line-height: 1.65; font-size: 0.92rem; }
+
+  .kw-list { list-style: none; padding: 0; margin: 14px 0; }
+  .kw-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    background: rgba(255,255,255,0.04);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--gray-100);
+  }
+  .kw-list li::before {
+    content: '→';
+    color: var(--blue-400);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+  .pill {
+    background: rgba(37,99,235,0.2);
+    border: 1px solid rgba(96,165,250,0.3);
+    color: var(--blue-300);
+    padding: 5px 14px;
+    border-radius: 99px;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .compare-box { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 14px; }
+  .compare-box h5 { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; color: var(--blue-400); margin-bottom: 8px; }
+  .compare-box p { font-size: 0.87rem; line-height: 1.6; color: var(--gray-100); }
+  @media(max-width: 500px) { .compare-grid { grid-template-columns: 1fr; } }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue-400);
+    margin: 20px 0 10px;
+  }
+
+  /* ===== QUIZ ===== */
+  .quiz-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .quiz-top h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; }
+  .quiz-meta { display: flex; gap: 12px; }
+  .badge {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .badge-blue { background: rgba(37,99,235,0.25); color: var(--blue-300); border: 1px solid rgba(96,165,250,0.3); }
+  .badge-gold { background: rgba(240,192,64,0.15); color: var(--gold); border: 1px solid rgba(240,192,64,0.3); }
+
+  .progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-600), var(--blue-400));
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  .question-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(96,165,250,0.2);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 24px;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .question-num {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-400);
+    margin-bottom: 14px;
+  }
+  .question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    color: white;
+  }
+
+  .options { display: grid; gap: 10px; }
+  .option-btn {
+    width: 100%;
+    text-align: left;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(96,165,250,0.2);
+    border-radius: 12px;
+    padding: 14px 20px;
+    color: var(--gray-100);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+  }
+  .option-btn:hover:not(:disabled) {
+    background: rgba(37,99,235,0.2);
+    border-color: rgba(96,165,250,0.5);
+    color: white;
+  }
+  .option-btn.correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: #14532d;
+  }
+  .option-btn.wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong);
+    color: #7f1d1d;
+  }
+  .option-btn.revealed {
+    background: rgba(22,163,74,0.12);
+    border-color: rgba(22,163,74,0.4);
+    color: #86efac;
+  }
+  .option-letter {
+    font-weight: 700;
+    min-width: 24px;
+    height: 24px;
+    background: rgba(96,165,250,0.15);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .option-btn.correct .option-letter { background: var(--correct); color: white; }
+  .option-btn.wrong .option-letter { background: var(--wrong); color: white; }
+  .option-btn.revealed .option-letter { background: rgba(22,163,74,0.4); color: #bbf7d0; }
+
+  .explanation {
+    margin-top: 16px;
+    background: rgba(37,99,235,0.12);
+    border: 1px solid rgba(96,165,250,0.25);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--blue-100);
+    animation: fadeIn 0.3s ease;
+  }
+  .explanation strong { color: var(--blue-300); }
+
+  .quiz-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 28px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--blue-600);
+    color: white;
+    box-shadow: 0 4px 15px rgba(37,99,235,0.4);
+  }
+  .btn-primary:hover { background: var(--blue-700); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--blue-300);
+    border: 1.5px solid rgba(96,165,250,0.4);
+  }
+  .btn-outline:hover { background: rgba(96,165,250,0.1); color: white; }
+
+  /* Score card */
+  .score-card {
+    background: linear-gradient(135deg, rgba(30,77,191,0.3), rgba(37,99,235,0.15));
+    border: 1px solid rgba(96,165,250,0.3);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .score-ring {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 6px solid rgba(96,165,250,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    position: relative;
+    background: rgba(37,99,235,0.1);
+  }
+  .score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold);
+  }
+  .score-total { font-size: 0.85rem; color: var(--blue-300); }
+  .score-card h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 8px; }
+  .score-card p { color: var(--blue-300); margin-bottom: 24px; }
+
+  .review-item {
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+    text-align: left;
+  }
+  .review-item.correct-item { border-color: var(--correct); }
+  .review-item.wrong-item { border-color: var(--wrong); }
+  .review-item .ri-q { font-size: 0.9rem; margin-bottom: 6px; color: var(--gray-100); }
+  .review-item .ri-a { font-size: 0.85rem; color: var(--blue-300); }
+  .review-item .ri-mark { font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .review-item.correct-item .ri-mark { color: var(--correct); }
+  .review-item.wrong-item .ri-mark { color: var(--wrong); }
+
+  /* Category filter */
+  .cat-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .cat-btn {
+    padding: 7px 16px;
+    border-radius: 99px;
+    border: 1.5px solid rgba(96,165,250,0.3);
+    background: transparent;
+    color: var(--blue-300);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .cat-btn:hover { background: rgba(96,165,250,0.1); color: white; }
+  .cat-btn.active { background: var(--blue-600); color: white; border-color: var(--blue-500); }
+
+  /* ===== ESSAY SECTION ===== */
+  .essay-intro {
+    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(37,99,235,0.12));
+    border: 1px solid rgba(167,139,250,0.25);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+  .essay-intro h2 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:10px; color: #c4b5fd; }
+  .essay-intro p { color: var(--blue-300); line-height:1.7; font-size:0.95rem; }
+
+  .essay-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; }
+  .essay-tab {
+    padding: 8px 20px; border-radius: 99px;
+    border: 1.5px solid rgba(167,139,250,0.3);
+    background: transparent; color: #c4b5fd;
+    font-size: 0.82rem; font-weight: 500; cursor: pointer;
+    transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .essay-tab:hover { background: rgba(167,139,250,0.1); color: white; }
+  .essay-tab.active { background: rgba(124,58,237,0.4); color: white; border-color: #a78bfa; }
+
+  .essay-grid { display: grid; gap: 24px; }
+
+  .essay-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(96,165,250,0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .essay-card:hover { border-color: rgba(167,139,250,0.35); }
+
+  .essay-card-header {
+    padding: 22px 28px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .essay-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 99px; font-size: 0.72rem;
+    font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .tag-essay { background: rgba(124,58,237,0.25); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.3); }
+  .tag-scenario { background: rgba(234,88,12,0.2); color: #fdba74; border: 1px solid rgba(251,146,60,0.3); }
+  .tag-scenario-mode { background: rgba(20,184,166,0.2); color: #5eead4; border: 1px solid rgba(94,234,212,0.3); }
+
+  .essay-card-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; line-height: 1.5; color: white;
+  }
+  .essay-card-header .clo-badge {
+    display: inline-block; margin-top: 10px;
+    padding: 3px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 600;
+    background: rgba(37,99,235,0.2); color: var(--blue-300); border: 1px solid rgba(96,165,250,0.25);
+  }
+
+  .essay-body { padding: 0 28px 24px; }
+
+  /* Scenario box */
+  .scenario-box {
+    margin: 18px 0 16px;
+    background: rgba(255,255,255,0.05);
+    border-left: 4px solid #f97316;
+    border-radius: 0 12px 12px 0;
+    padding: 18px 20px;
+    font-size: 0.93rem; line-height: 1.75; color: var(--gray-100);
+  }
+  .scenario-box .scene-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #fdba74; margin-bottom: 10px; display: block;
+  }
+
+  /* Guide points */
+  .guide-section { margin-top: 16px; }
+  .guide-section .guide-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #5eead4; margin-bottom: 10px; display: block;
+  }
+
+  /* Answer reveal */
+  .reveal-btn {
+    margin-top: 14px; padding: 10px 20px; border-radius: 10px;
+    border: 1.5px solid rgba(167,139,250,0.4);
+    background: transparent; color: #c4b5fd;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+  }
+  .reveal-btn:hover { background: rgba(124,58,237,0.2); color: white; }
+
+  .model-answer {
+    display: none;
+    margin-top: 16px;
+    background: linear-gradient(135deg, rgba(20,184,166,0.08), rgba(37,99,235,0.08));
+    border: 1px solid rgba(94,234,212,0.2);
+    border-radius: 14px;
+    padding: 20px 22px;
+    animation: fadeIn 0.3s ease;
+  }
+  .model-answer.visible { display: block; }
+  .model-answer .ma-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #5eead4; margin-bottom: 12px; display: block;
+  }
+  .model-answer p { font-size: 0.9rem; line-height: 1.75; color: var(--gray-100); margin-bottom: 10px; }
+  .model-answer p:last-child { margin-bottom: 0; }
+  .model-answer strong { color: #93c5fd; }
+
+  /* Mode badge */
+  .mode-verdict {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 18px; border-radius: 10px; font-size: 0.88rem; font-weight: 700;
+    margin: 14px 0;
+  }
+  .mode-doing { background: rgba(234,88,12,0.2); color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+  .mode-being { background: rgba(20,184,166,0.2); color: #2dd4bf; border: 1px solid rgba(94,234,212,0.3); }
+  .mode-both { background: rgba(168,85,247,0.2); color: #c084fc; border: 1px solid rgba(192,132,252,0.3); }
+
+  .technique-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .tech-chip {
+    padding: 5px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;
+    background: rgba(37,99,235,0.2); color: var(--blue-300);
+    border: 1px solid rgba(96,165,250,0.3);
+  }
+
+  .essay-textarea {
+    width: 100%; margin-top: 14px; padding: 16px 18px;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(96,165,250,0.2);
+    border-radius: 12px; color: white;
+    font-family: 'DM Sans', sans-serif; font-size: 0.93rem; line-height: 1.6;
+    resize: vertical; min-height: 120px;
+    transition: border-color 0.2s;
+  }
+  .essay-textarea:focus { outline: none; border-color: rgba(167,139,250,0.5); }
+  .essay-textarea::placeholder { color: rgba(148,163,184,0.5); }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">TLH068 · Tâm Lý Học</div>
+  <h1>Chánh Niệm, Yoga &<br>Sức Khỏe Tinh Thần</h1>
+  <p>Ôn tập kiến thức toàn diện và luyện quiz chuẩn bị thi cuối kỳ</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">40+</span><span class="stat-label">Câu hỏi quiz</span></div>
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Bài học chính</span></div>
+    <div class="stat"><span class="stat-num">5</span><span class="stat-label">CLOs</span></div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showSection('wiki')">📚 Wiki Kiến Thức</button>
+  <button class="tab-btn" onclick="showSection('quiz')">🧠 Luyện Quiz</button>
+  <button class="tab-btn" onclick="showSection('essay')">✍️ Tự Luận & Tình Huống</button>
+  <button class="tab-btn" onclick="showSection('flashcard')">⚡ Flashcard Nhanh</button>
+</div>
+
+<div class="main">
+
+  <!-- ===== WIKI SECTION ===== -->
+  <div id="wiki" class="section active">
+    <div class="wiki-intro">
+      <h2>📖 Tổng Quan Môn Học</h2>
+      <p>Học phần cung cấp nền tảng lý thuyết và thực hành về chánh niệm (mindfulness), yoga trị liệu, và mối liên hệ thân – tâm – trí. Thi cuối kỳ gồm 20 câu trắc nghiệm (50%) + tự luận (50%), đánh giá CLO1–CLO5.</p>
+    </div>
+
+    <div class="wiki-grid">
+
+      <!-- BÀI 1 -->
+      <div class="wiki-card" id="card1">
+        <div class="wiki-card-header" onclick="toggleCard('card1')">
+          <div class="wiki-card-title">
+            <div class="wiki-icon">🌿</div>
+            <div>
+              <h3>Bài 1: Tổng Quan – Chánh Niệm, Yoga & Sức Khỏe Tinh Thần</h3>
+              <p>Khái niệm nền tảng · Mô hình sinh học–tâm lý–xã hội–tinh thần</p>
+            </div>
+          </div>
+          <span class="wiki-chevron">▼</span>
+        </div>
+        <div class="wiki-body">
+          <div class="key-concept">
+            <strong>Định nghĩa Chánh Niệm (Mindfulness)</strong>
+            <p>Khả năng chú ý có chủ ý, trong hiện tại, với thái độ không phán xét đối với các trải nghiệm đang diễn ra trong thân và tâm. Mindfulness không nhằm tạo cảm giác dễ chịu ngay lập tức mà giúp thay đổi mối quan hệ với trải nghiệm nội tâm.</p>
+          </div>
+          <div class="key-concept">
+            <strong>Mô hình Sức Khỏe Tích Hợp (Sinh học–Tâm lý–Xã hội–Tinh thần)</strong>
+            <p>Sức khỏe tinh thần không chỉ là sự vắng mặt của bệnh tâm lý, mà là trạng thái cân bằng toàn diện của thân–tâm–trí, bao gồm yếu tố sinh học, tâm lý, xã hội và tinh thần.</p>
+          </div>
+          <div class="section-label">Vai trò của Yoga & Chánh Niệm</div>
+          <ul class="kw-list">
+            <li>Yoga: thực hành tích hợp asana (tư thế) – pranayama (hơi thở) – thiền, không chỉ là thể dục</li>
+            <li>Chánh niệm hỗ trợ chăm sóc sức khỏe thể chất, tâm trí và tinh thần</li>
+            <li>Mối liên hệ thân–tâm–trí là nền tảng của mô hình trị liệu tích hợp</li>
+            <li>Cả hai đều dựa trên bằng chứng khoa học (evidence-based)</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Mindful Breathing</span>
+            <span class="pill">Thân–Tâm–Trí</span>
+            <span class="pill">Evidence-Based</span>
+            <span class="pill">MBCT</span>
+            <span class="pill">Pranayama</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BÀI 2 -->
+      <div class="wiki-card" id="card2">
+        <div class="wiki-card-header" onclick="toggleCard('card2')">
+          <div class="wiki-card-title">
+            <div class="wiki-icon">🧠</div>
+            <div>
+              <h3>Bài 2: Cơ Sở Thần Kinh – Sinh Lý của Căng Thẳng & Thư Giãn</h3>
+              <p>Trục HPA · Fight-Flight-Freeze · Polyvagal Theory</p>
+            </div>
+          </div>
+          <span class="wiki-chevron">▼</span>
+        </div>
+        <div class="wiki-body">
+          <div class="key-concept">
+            <strong>Hệ Thần Kinh Tự Động (ANS)</strong>
+            <p>Gồm 2 nhánh: <em>Giao cảm (Sympathetic)</em> – kích hoạt, cảnh giác, stress; và <em>Đối giao cảm (Parasympathetic)</em> – thư giãn, phục hồi, chữa lành. Hầu hết thực hành chánh niệm/yoga đều kích hoạt hệ đối giao cảm.</p>
+          </div>
+          <div class="section-label">Phản Ứng Fight – Flight – Freeze (Cannon, 1929)</div>
+          <ul class="kw-list">
+            <li><strong>Fight (chiến đấu):</strong> Cơ thể căng cơ, tăng năng lượng để đối đầu</li>
+            <li><strong>Flight (bỏ chạy):</strong> Nhịp tim & nhịp thở tăng để thoát thân</li>
+            <li><strong>Freeze (đóng băng):</strong> Bất động, tê cứng như cơ chế bảo vệ cuối cùng</li>
+          </ul>
+          <div class="key-concept">
+            <strong>Trục HPA (Hypothalamus – Pituitary – Adrenal)</strong>
+            <p>Khi amygdala nhận diện mối đe dọa → tín hiệu đến hypothalamus → kích hoạt tuyến yên → tuyến thượng thận giải phóng cortisol. Cortisol duy trì năng lượng cho cơ thể đối phó stress. Cortisol kéo dài gây tổn thương hippocampus.</p>
+          </div>
+          <div class="key-concept">
+            <strong>3 Hormone Stress Chính</strong>
+            <p>• <strong>Adrenaline</strong>: tăng nhịp tim, huyết áp<br>• <strong>Noradrenaline</strong>: tăng tập trung và cảnh giác<br>• <strong>Cortisol</strong>: duy trì năng lượng dài hạn</p>
+          </div>
+          <div class="compare-grid">
+            <div class="compare-box">
+              <h5>Stress Cấp Tính</h5>
+              <p>Ngắn hạn, có tính thích nghi, phục hồi nhanh. Có thể cần thiết và hữu ích.</p>
+            </div>
+            <div class="compare-box">
+              <h5>Stress Mãn Tính</h5>
+              <p>Cortisol cao kéo dài → tổn thương hippocampus, suy miễn dịch, rối loạn giấc ngủ.</p>
+            </div>
+          </div>
+          <div class="key-concept">
+            <strong>Allostatic Load (McEwen, 1998)</strong>
+            <p>"Gánh nặng sinh học" khi cơ thể liên tục thích nghi với stress. Khi vượt ngưỡng → các hệ thống sinh lý suy yếu.</p>
+          </div>
+          <div class="key-concept">
+            <strong>Polyvagal Theory (Porges, 2011)</strong>
+            <p>3 trạng thái hệ thần kinh:<br>1. <strong>Ventral vagal</strong>: an toàn, kết nối xã hội, học tập<br>2. <strong>Sympathetic</strong>: fight/flight, căng thẳng<br>3. <strong>Dorsal vagal</strong>: tê liệt, kiệt sức, shutdown</p>
+          </div>
+          <div class="key-concept">
+            <strong>Vòng Lặp Thân – Tâm</strong>
+            <p>Stress thường bắt đầu từ cơ thể → cảm xúc → suy nghĩ tiêu cực → hành vi né tránh → stress tăng. Can thiệp qua cơ thể & hơi thở hiệu quả hơn là "nghĩ tích cực".</p>
+          </div>
+          <div class="key-concept">
+            <strong>Doing Mode vs. Being Mode (MBCT)</strong>
+            <p><strong>Doing Mode</strong>: phân tích, sửa chữa, hướng mục tiêu – khi dùng lúc stress sẽ tạo overthinking.<br><strong>Being Mode</strong>: nhận biết, chấp nhận, hiện diện – cho phép hệ thần kinh tự điều chỉnh.</p>
+          </div>
+          <div class="key-concept">
+            <strong>Mô Hình Đánh Giá Stress (Lazarus, 1991)</strong>
+            <p><strong>Đánh giá sơ cấp</strong>: Tình huống có đe dọa không?<br><strong>Đánh giá thứ cấp</strong>: Tôi có đủ nguồn lực đối phó không?<br>→ Stress phụ thuộc vào cách cá nhân gán ý nghĩa cho sự kiện, không chỉ bản thân sự kiện.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BÀI 3 -->
+      <div class="wiki-card" id="card3">
+        <div class="wiki-card-header" onclick="toggleCard('card3')">
+          <div class="wiki-card-title">
+            <div class="wiki-icon">🪷</div>
+            <div>
+              <h3>Bài 3: Các Kỹ Thuật Mindfulness trong MBCT</h3>
+              <p>7 kỹ thuật cốt lõi · Decentering · Body Scan</p>
+            </div>
+          </div>
+          <span class="wiki-chevron">▼</span>
+        </div>
+        <div class="wiki-body">
+          <div class="key-concept">
+            <strong>MBCT là gì?</strong>
+            <p>Mindfulness-Based Cognitive Therapy – phát triển bởi Segal, Williams & Teasdale. Kết hợp CBT với chánh niệm. Mục tiêu: không loại bỏ cảm xúc tiêu cực mà thay đổi mối quan hệ với suy nghĩ/cảm xúc. Hiệu quả nhất trong phòng ngừa tái phát trầm cảm.</p>
+          </div>
+          <div class="section-label">4 Mục Tiêu Tâm Lý Cốt Lõi của MBCT</div>
+          <ul class="kw-list">
+            <li><strong>Giảm Rumination</strong>: ngăn suy nghĩ nhai đi nhai lại về tiêu cực</li>
+            <li><strong>Phát triển Decentering</strong>: nhìn suy nghĩ như sự kiện tâm trí, không phải sự thật</li>
+            <li><strong>Chuyển Doing→Being Mode</strong>: từ phân tích sang hiện diện</li>
+            <li><strong>Nhận biết sớm</strong>: phát hiện các tín hiệu tâm lý dễ tổn thương từ sớm</li>
+          </ul>
+          <div class="section-label">7 Kỹ Thuật Mindfulness trong MBCT</div>
+          <ul class="kw-list">
+            <li><strong>1. Three-Minute Breathing Space (3MB)</strong>: Nhận biết → Quy tụ về hơi thở → Mở rộng. Là "công cụ cứu hộ" tâm lý giữa cuộc sống.</li>
+            <li><strong>2. Mindful Breathing</strong>: Theo dõi hơi thở như nó đang là, không điều khiển, không phán xét. Tạo điểm neo ổn định.</li>
+            <li><strong>3. Body Scan (Quét cơ thể)</strong>: Quan sát lần lượt từng vùng cơ thể. Phát triển body awareness, phát hiện stress sớm.</li>
+            <li><strong>4. Mindful Movement</strong>: Vận động có ý thức – chậm rãi, chú ý hơi thở, không phán xét.</li>
+            <li><strong>5. Seated Meditation (Thiền ngồi)</strong>: Body sensations → Thoughts → Emotions. Phát triển metacognitive awareness.</li>
+            <li><strong>6. Choiceless Awareness</strong>: Quan sát mọi trải nghiệm mà không chọn bám vào bất kỳ đối tượng nào. Nhận ra vô thường.</li>
+            <li><strong>7. Everyday Mindfulness</strong>: Chánh niệm trong hoạt động hằng ngày – rửa chén, đi bộ, ăn uống. Duy trì trạng thái hiện diện.</li>
+          </ul>
+          <div class="key-concept">
+            <strong>Bằng Chứng Khoa Học</strong>
+            <p>Arch & Craske (2006): Chỉ 15 phút mindful breathing → giảm phản ứng cảm xúc tiêu cực, tăng khả năng quan sát cảm xúc khó chịu mà không né tránh.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BÀI 4 -->
+      <div class="wiki-card" id="card4">
+        <div class="wiki-card-header" onclick="toggleCard('card4')">
+          <div class="wiki-card-title">
+            <div class="wiki-icon">❤️</div>
+            <div>
+              <h3>Bài 4: Ứng Dụng Chánh Niệm trong Điều Hoà Cảm Xúc</h3>
+              <p>Kỹ thuật STOP · Reactive vs Responsive · Decentering</p>
+            </div>
+          </div>
+          <span class="wiki-chevron">▼</span>
+        </div>
+        <div class="wiki-body">
+          <div class="key-concept">
+            <strong>Kỹ Thuật STOP</strong>
+            <p><strong>S</strong>top – Dừng lại<br><strong>T</strong>ake a breath – Thở có ý thức<br><strong>O</strong>bserve – Quan sát thân–tâm–cảm xúc<br><strong>P</strong>roceed – Tiếp tục với sự lựa chọn có ý thức<br>→ Tạo khoảng dừng tỉnh thức, giành lại quyền lựa chọn.</p>
+          </div>
+          <div class="compare-grid">
+            <div class="compare-box">
+              <h5>Phản Ứng Tự Động (Reactive)</h5>
+              <p>Automatic pilot, bị kích hoạt vô thức, hành vi theo thói quen cũ, không có khoảng dừng.</p>
+            </div>
+            <div class="compare-box">
+              <h5>Phản Ứng Có Ý Thức (Responsive)</h5>
+              <p>Nhận ra, dừng lại, quan sát, lựa chọn cách phản ứng phù hợp với giá trị cá nhân.</p>
+            </div>
+          </div>
+          <div class="key-concept">
+            <strong>Decentering (Tách Rời Khỏi Suy Nghĩ)</strong>
+            <p>Chuyển từ <em>"Tôi là cảm xúc"</em> sang <em>"Tôi có cảm xúc"</em>. Suy nghĩ được nhìn như sự kiện tâm trí, không phải sự thật tuyệt đối. Đây là nền tảng của lòng tự bi và chấp nhận.</p>
+          </div>
+          <div class="key-concept">
+            <strong>Rumination và Vòng Xoáy Cảm Xúc</strong>
+            <p>Rumination: suy nghĩ lặp đi lặp lại về tiêu cực. Là yếu tố cốt lõi duy trì trầm cảm/lo âu (Teasdale et al., 1995). MBCT không can thiệp trực tiếp vào nội dung suy nghĩ mà thay đổi mối quan hệ với suy nghĩ.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BÀI 5 -->
+      <div class="wiki-card" id="card5">
+        <div class="wiki-card-header" onclick="toggleCard('card5')">
+          <div class="wiki-card-title">
+            <div class="wiki-icon">💨</div>
+            <div>
+              <h3>Bài 5: Kỹ Thuật Thở (Pranayama)</h3>
+              <p>Thở bụng · Nadi Shodhana · Thở 4 thì · Box Breathing</p>
+            </div>
+          </div>
+          <span class="wiki-chevron">▼</span>
+        </div>
+        <div class="wiki-body">
+          <div class="key-concept">
+            <strong>Nguyên Lý Cốt Lõi</strong>
+            <p>Hơi thở là "cửa ngõ" dễ tiếp cận nhất để can thiệp vào hệ thần kinh tự động. Thở chậm, sâu → kích hoạt hệ đối giao cảm → thư giãn. Thở nhanh, nông → kích hoạt giao cảm → tỉnh táo/lo âu. Quan hệ hai chiều: hơi thở phản ánh VÀ tác động lại hệ thần kinh.</p>
+          </div>
+          <div class="section-label">Nhóm Kỹ Thuật Thở Làm Dịu (Calming / Parasympathetic)</div>
+          <ul class="kw-list">
+            <li><strong>Thở bụng (Diaphragmatic Breathing)</strong>: Hít vào đẩy bụng phồng, thở ra bụng xẹp. Tay đặt lên bụng để cảm nhận. Kích hoạt hệ đối giao cảm.</li>
+            <li><strong>Thở luân phiên – Nadi Shodhana</strong>: Dùng ngón cái & ngón áp út bịt lần lượt từng lỗ mũi. Cân bằng hai bán cầu não, tạo trạng thái trung tính.</li>
+            <li><strong>Thở 4 thì (Box Breathing)</strong>: Hít vào 4s → Giữ 4s → Thở ra 4s → Giữ 4s. Giảm lo âu, tăng tập trung.</li>
+            <li><strong>4-7-8 Breathing</strong>: Hít vào 4s → Giữ 7s → Thở ra 8s. Thì thở ra dài kích hoạt dây thần kinh phế vị.</li>
+          </ul>
+          <div class="key-concept">
+            <strong>Dây Thần Kinh Phế Vị (Vagus Nerve)</strong>
+            <p>Hơi thở chậm với thì thở ra dài hơn → tăng vagal tone → cải thiện điều hòa cảm xúc, giảm phản ứng sợ hãi (Porges, 2011). Đây là cơ chế sinh học của Relaxation Response (Benson, 1975).</p>
+          </div>
+          <div class="key-concept">
+            <strong>Nguyên Tắc An Toàn</strong>
+            <p>Không nên thực hành nếu có: rối loạn hoảng sợ nặng, bệnh tim mạch, động kinh, mang thai, sang chấn tâm lý cấp. Bắt đầu nhẹ, ngắn, quan sát phản ứng cơ thể.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BÀI 6 -->
+      <div class="wiki-card" id="card6">
+        <div class="wiki-card-header" onclick="toggleCard('card6')">
+          <div class="wiki-card-title">
+            <div class="wiki-icon">🧘</div>
+            <div>
+              <h3>Bài 6: Vận Động Có Ý Thức (Mindful Movement / Asana)</h3>
+              <p>Relaxing Flow · Grounding Flow · Savasana · Tích Hợp</p>
+            </div>
+          </div>
+          <span class="wiki-chevron">▼</span>
+        </div>
+        <div class="wiki-body">
+          <div class="key-concept">
+            <strong>Mindful Movement là gì?</strong>
+            <p>Không phải thể dục thể thao thông thường. Tập trung vào chất lượng hiện diện, lắng nghe tín hiệu cơ thể, kết nối chuyển động–hơi thở–tâm trí. Chuyển động chậm, có chủ đích, không phán xét.</p>
+          </div>
+          <div class="compare-grid">
+            <div class="compare-box">
+              <h5>Vận Động Thông Thường</h5>
+              <p>Chú trọng cường độ, thành tích, hình dáng cơ thể, kết quả bên ngoài.</p>
+            </div>
+            <div class="compare-box">
+              <h5>Vận Động Tỉnh Thức</h5>
+              <p>Chú trọng chất lượng hiện diện, cảm giác bên trong, kết nối thân–tâm.</p>
+            </div>
+          </div>
+          <div class="section-label">3 Chuỗi Vận Động Chính</div>
+          <ul class="kw-list">
+            <li><strong>Relaxing Flow</strong>: Làm dịu, tạo an toàn sinh lý. Dành cho người lo âu, căng thẳng cao. Kích hoạt đối giao cảm.</li>
+            <li><strong>Grounding Flow</strong>: Củng cố vững chãi, tỉnh táo. Tư thế đứng, thăng bằng (Tree Pose). Phù hợp khi mất tập trung, "không ở trong thân".</li>
+            <li><strong>Integration & Rest (Savasana)</strong>: Tư thế "không làm" – cho phép buông xuống. Kích hoạt tối đa hệ đối giao cảm. Tích hợp tác động sinh lý–tâm lý sau vận động.</li>
+          </ul>
+          <div class="key-concept">
+            <strong>Vai Trò Của Savasana</strong>
+            <p>Không chỉ là "nghỉ cho xong" mà là thực hành chánh niệm mang tính trị liệu. Buông xuống tất cả nỗ lực → hệ thần kinh chuyển sang tiếp nhận và phục hồi. Kết hợp với Body Scan = tích hợp mạnh mẽ thân–tâm.</p>
+          </div>
+          <div class="key-concept">
+            <strong>Yoga và Sinh Học Stress</strong>
+            <p>• Tăng GABA → giảm lo âu (Streeter et al., 2007)<br>• Giảm cytokine viêm IL-6 & TNF-α (Kiecolt-Glaser et al., 2010)<br>→ Yoga tạo ra thay đổi sinh học đo lường được, không chỉ tác động chủ quan.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BÀI 7+8 -->
+      <div class="wiki-card" id="card7">
+        <div class="wiki-card-header" onclick="toggleCard('card7')">
+          <div class="wiki-card-title">
+            <div class="wiki-icon">✨</div>
+            <div>
+              <h3>Bài 7–8: Cảm Xúc Tích Cực & Kế Hoạch Tự Chăm Sóc</h3>
+              <p>Lòng biết ơn · Trắc ẩn · Tha thứ · Loving-kindness</p>
+            </div>
+          </div>
+          <span class="wiki-chevron">▼</span>
+        </div>
+        <div class="wiki-body">
+          <div class="key-concept">
+            <strong>Thiền Tâm Từ (Loving-Kindness Meditation)</strong>
+            <p>Thực hành nuôi dưỡng lòng tốt lành và mong ước hạnh phúc cho bản thân và người khác. Kết hợp tư thế yoga mở tim, hơi thở và thiền để khơi mở cảm xúc tích cực.</p>
+          </div>
+          <ul class="kw-list">
+            <li><strong>Lòng biết ơn (Gratitude)</strong>: Nhận ra và trân trọng những điều tốt đẹp. Có bằng chứng giảm trầm cảm và tăng well-being.</li>
+            <li><strong>Trắc ẩn (Compassion)</strong>: Khả năng nhận ra khổ đau và mong muốn giúp đỡ. Bắt đầu từ lòng tự bi (self-compassion).</li>
+            <li><strong>Tha thứ (Forgiveness)</strong>: Giải phóng khỏi oán trách để chữa lành bản thân, không phải để biện hộ cho người khác.</li>
+          </ul>
+          <div class="key-concept">
+            <strong>Kế Hoạch Tự Chăm Sóc Tích Hợp (Bài 8)</strong>
+            <p>Xây dựng theo: Mục tiêu → Kỹ thuật phù hợp → Thời lượng → Theo dõi tiến trình. Phân tích nhu cầu từng nhóm đối tượng: học sinh, sinh viên, nhân viên văn phòng, người cao tuổi.</p>
+          </div>
+          <div class="key-concept">
+            <strong>Tác Động Chánh Niệm Lên Não Bộ</strong>
+            <p>• Tăng độ dày hippocampus (trí nhớ & điều hòa cảm xúc) – Hölzel et al., 2011<br>• Giảm hoạt hóa amygdala (xử lý sợ hãi)<br>• Tăng hoạt động prefrontal cortex (kiểm soát chú ý)<br>• Giảm Default Mode Network (DMN) – giảm rumination – Brewer et al., 2011</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end wiki-grid -->
+  </div><!-- end wiki -->
+
+  <!-- ===== QUIZ SECTION ===== -->
+  <div id="quiz" class="section">
+    <div class="quiz-top">
+      <h2>🧠 Luyện Quiz</h2>
+      <div class="quiz-meta">
+        <span class="badge badge-blue" id="quiz-progress-label">Câu 1/40</span>
+        <span class="badge badge-gold" id="quiz-score-label">Điểm: 0</span>
+      </div>
+    </div>
+    <div class="cat-filter">
+      <button class="cat-btn active" onclick="filterCat('all',this)">Tất Cả</button>
+      <button class="cat-btn" onclick="filterCat('stress',this)">Stress & TK</button>
+      <button class="cat-btn" onclick="filterCat('mindfulness',this)">Mindfulness</button>
+      <button class="cat-btn" onclick="filterCat('yoga',this)">Yoga & Hơi Thở</button>
+      <button class="cat-btn" onclick="filterCat('emotion',this)">Cảm Xúc</button>
+      <button class="cat-btn" onclick="filterCat('concept',this)">Khái Niệm</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="quiz-progress-bar" style="width:0%"></div></div>
+
+    <div id="quiz-container"></div>
+    <div id="quiz-result" class="hidden"></div>
+
+    <div class="quiz-actions">
+      <button class="btn btn-outline" onclick="restartQuiz()">🔄 Làm Lại</button>
+      <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Câu Tiếp →</button>
+    </div>
+  </div>
+
+  <!-- ===== FLASHCARD SECTION ===== -->
+  <div id="flashcard" class="section">
+    <div class="quiz-top">
+      <h2>⚡ Flashcard Nhanh</h2>
+      <span class="badge badge-blue" id="fc-counter">1 / 20</span>
+    </div>
+    <div id="fc-card" style="perspective:1000px; cursor:pointer; margin-bottom:24px;" onclick="flipCard()">
+      <div id="fc-inner" style="position:relative; height:220px; transition: transform 0.6s; transform-style: preserve-3d;">
+        <div id="fc-front" style="position:absolute; inset:0; background:linear-gradient(135deg,rgba(30,77,191,0.4),rgba(37,99,235,0.2)); border:1px solid rgba(96,165,250,0.3); border-radius:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px; text-align:center; backface-visibility:hidden;">
+          <div style="font-size:0.75rem;letter-spacing:2px;color:var(--blue-400);text-transform:uppercase;margin-bottom:16px;">Thuật Ngữ / Câu Hỏi</div>
+          <div id="fc-q" style="font-family:'Playfair Display',serif;font-size:1.4rem;line-height:1.4;color:white;"></div>
+          <div style="margin-top:20px;font-size:0.8rem;color:var(--blue-400);">👆 Nhấp để lật</div>
+        </div>
+        <div id="fc-back" style="position:absolute; inset:0; background:linear-gradient(135deg,rgba(22,163,74,0.2),rgba(37,99,235,0.15)); border:1px solid rgba(96,165,250,0.3); border-radius:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px; text-align:center; backface-visibility:hidden; transform: rotateY(180deg);">
+          <div style="font-size:0.75rem;letter-spacing:2px;color:#86efac;text-transform:uppercase;margin-bottom:16px;">Đáp Án</div>
+          <div id="fc-a" style="font-size:1rem;line-height:1.6;color:var(--gray-100);"></div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-actions">
+      <button class="btn btn-outline" onclick="prevCard()">← Trước</button>
+      <button class="btn btn-primary" onclick="nextCard()">Tiếp →</button>
+    </div>
+  </div>
+
+  <!-- ===== ESSAY SECTION ===== -->
+  <div id="essay" class="section">
+
+    <div class="essay-intro">
+      <h2>✍️ Tự Luận & Nhận Diện Tình Huống</h2>
+      <p>Luyện tập kỹ năng phân tích – vận dụng lý thuyết vào thực tiễn. Bao gồm câu hỏi tự luận mở, tình huống nhận diện <strong>Doing Mode / Being Mode</strong>, và câu hỏi đề xuất kỹ thuật can thiệp phù hợp. Nhấn <strong>"Xem gợi ý đáp án"</strong> sau khi đã suy nghĩ.</p>
+    </div>
+
+    <div class="essay-tabs">
+      <button class="essay-tab active" onclick="filterEssay('all',this)">Tất Cả</button>
+      <button class="essay-tab" onclick="filterEssay('essay',this)">Câu Tự Luận</button>
+      <button class="essay-tab" onclick="filterEssay('scenario',this)">Tình Huống Thực Tế</button>
+      <button class="essay-tab" onclick="filterEssay('mode',this)">Nhận Diện Mode</button>
+    </div>
+
+    <div class="essay-grid" id="essay-grid">
+
+      <!-- =========== TỰ LUẬN 1 =========== -->
+      <div class="essay-card" data-type="essay">
+        <div class="essay-card-header">
+          <span class="essay-tag tag-essay">✍️ Tự Luận</span>
+          <h3>Giải thích cơ chế "vòng lặp thân–tâm" trong stress và vai trò của chánh niệm trong việc ngắt vòng lặp này.</h3>
+          <span class="clo-badge">CLO3 · CLO4</span>
+        </div>
+        <div class="essay-body">
+          <div class="guide-section">
+            <span class="guide-label">📌 Gợi ý cấu trúc bài làm</span>
+            <ul class="kw-list">
+              <li>Mô tả vòng lặp: Cơ thể (tín hiệu sinh lý) → Cảm xúc → Suy nghĩ tiêu cực → Hành vi né tránh → Stress tăng</li>
+              <li>Giải thích tại sao cố "nghĩ tích cực" không hiệu quả khi cơ thể đang căng thẳng</li>
+              <li>Vai trò của chánh niệm: tạo "khoảng dừng", can thiệp qua cơ thể và hơi thở</li>
+              <li>Dẫn chứng: Rumination (Teasdale et al., 1995), Relaxation Response (Benson, 1975)</li>
+            </ul>
+          </div>
+          <textarea class="essay-textarea" placeholder="Viết câu trả lời của bạn vào đây..."></textarea>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">👁 Xem gợi ý đáp án</button>
+          <div class="model-answer">
+            <span class="ma-label">💡 Gợi Ý Đáp Án</span>
+            <p>Stress không vận hành tuyến tính mà như một vòng lặp tự duy trì: <strong>cơ thể</strong> (nhịp tim tăng, thở nông, cơ căng) → não diễn giải thành <strong>cảm xúc</strong> lo âu → hình thành <strong>suy nghĩ</strong> đe dọa/tự chỉ trích → dẫn đến <strong>hành vi</strong> né tránh/phòng vệ → tạo thêm áp lực cơ thể. Điểm then chốt của vòng lặp là sự thiếu vắng "khoảng dừng".</p>
+            <p>Lý do cố "nghĩ tích cực" không hiệu quả: khi hệ giao cảm đang kích hoạt mạnh, Doing Mode phân tích/sửa chữa lại càng làm stress trầm trọng hơn qua overthinking. Can thiệp vào tư duy lúc cơ thể căng thẳng thường không mang lại hiệu quả.</p>
+            <p>Chánh niệm can thiệp bằng cách <strong>quay về cơ thể và hơi thở</strong> – tạo khoảng dừng sinh lý. Hơi thở chậm kích hoạt hệ đối giao cảm (Relaxation Response – Benson, 1975), làm giảm mức cortisol và nhịp tim. Đồng thời, MBCT giúp nhận ra rumination ngay khi bắt đầu và quan sát suy nghĩ như "sự kiện tâm trí" thay vì sự thật (Teasdale et al., 1995), từ đó ngắt vòng lặp thân–tâm.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== TỰ LUẬN 2 =========== -->
+      <div class="essay-card" data-type="essay">
+        <div class="essay-card-header">
+          <span class="essay-tag tag-essay">✍️ Tự Luận</span>
+          <h3>Phân tích Polyvagal Theory của Porges (2011) và giải thích tại sao cảm giác an toàn là nền tảng thiết yếu cho bất kỳ can thiệp chánh niệm/yoga nào.</h3>
+          <span class="clo-badge">CLO3 · CLO5</span>
+        </div>
+        <div class="essay-body">
+          <div class="guide-section">
+            <span class="guide-label">📌 Gợi ý cấu trúc bài làm</span>
+            <ul class="kw-list">
+              <li>Trình bày 3 trạng thái hệ thần kinh: ventral vagal, sympathetic, dorsal vagal</li>
+              <li>Giải thích neuroception – hệ thần kinh quét tín hiệu an toàn/đe dọa liên tục</li>
+              <li>Phân tích: nếu người học ở trạng thái sympathetic hay dorsal vagal, các thực hành mindfulness sẽ bị hạn chế hiệu quả</li>
+              <li>Ứng dụng: tại sao Grounding Flow, thở bụng, Savasana đều nhằm mục tiêu tạo tín hiệu an toàn trước tiên</li>
+            </ul>
+          </div>
+          <textarea class="essay-textarea" placeholder="Viết câu trả lời của bạn vào đây..."></textarea>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">👁 Xem gợi ý đáp án</button>
+          <div class="model-answer">
+            <span class="ma-label">💡 Gợi Ý Đáp Án</span>
+            <p>Polyvagal Theory mô tả hệ thần kinh hoạt động theo 3 tầng: <strong>Ventral vagal</strong> (an toàn, kết nối xã hội, học tập hiệu quả) → <strong>Sympathetic</strong> (fight/flight, căng thẳng, phòng vệ) → <strong>Dorsal vagal</strong> (tê liệt, shutdown, kiệt sức). Hệ thần kinh tự động quét môi trường qua quá trình gọi là <strong>neuroception</strong> – hoàn toàn ngoài ý thức.</p>
+            <p>Cảm giác an toàn là điều kiện tiên quyết vì: khi hệ thần kinh ở trạng thái sympathetic (căng thẳng cao) hoặc dorsal vagal (tê liệt), người học không thể tiếp cận các chức năng học tập, kết nối và tự điều chỉnh. Mọi kỹ thuật chánh niệm đều đòi hỏi một mức độ "an toàn sinh lý" tối thiểu để có thể được xử lý bởi não bộ.</p>
+            <p>Ứng dụng thực tiễn: Thở bụng, Grounding, Relaxing Flow và Savasana đều nhằm đưa hệ thần kinh về trạng thái ventral vagal trước khi thực hành thiền sâu hơn. Đây là lý do tại sao trong MBCT, các buổi đầu bao giờ cũng bắt đầu bằng các thực hành nhẹ nhàng tạo an toàn, không phải ngay lập tức vào thiền định.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== TỰ LUẬN 3 =========== -->
+      <div class="essay-card" data-type="essay">
+        <div class="essay-card-header">
+          <span class="essay-tag tag-essay">✍️ Tự Luận</span>
+          <h3>Xây dựng một kế hoạch can thiệp ngắn hạn (4 buổi) sử dụng chánh niệm và yoga cho nhóm sinh viên đại học đang trải qua stress học tập mãn tính trước mùa thi.</h3>
+          <span class="clo-badge">CLO4 · CLO5</span>
+        </div>
+        <div class="essay-body">
+          <div class="guide-section">
+            <span class="guide-label">📌 Gợi ý cấu trúc bài làm</span>
+            <ul class="kw-list">
+              <li>Phân tích nhu cầu đặc thù: sinh viên, stress học tập, thời gian hạn chế</li>
+              <li>Mục tiêu can thiệp rõ ràng (dựa trên CLO2, CLO5)</li>
+              <li>Lộ trình 4 buổi: từ nhận diện → thực hành → điều hòa → tích hợp</li>
+              <li>Kỹ thuật cụ thể mỗi buổi + lý giải tại sao chọn kỹ thuật đó</li>
+              <li>Cách theo dõi tiến trình và điều chỉnh</li>
+            </ul>
+          </div>
+          <textarea class="essay-textarea" placeholder="Viết kế hoạch can thiệp của bạn vào đây..."></textarea>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">👁 Xem gợi ý đáp án</button>
+          <div class="model-answer">
+            <span class="ma-label">💡 Gợi Ý Đáp Án</span>
+            <p><strong>Phân tích nhu cầu:</strong> Sinh viên trước mùa thi thường có: tư duy Doing Mode cao (phân tích, lo lắng liên tục), rumination về kết quả thi, thở nông/cơ thể căng, thiếu ngủ và ít vận động.</p>
+            <p><strong>Buổi 1 – Nhận diện & Nền tảng:</strong> Psychoeducation về vòng lặp stress thân–tâm. Thực hành: Thở bụng + Grounding (tạo an toàn sinh lý). Mục tiêu: sinh viên nhận ra tín hiệu stress trên cơ thể mình.</p>
+            <p><strong>Buổi 2 – Kỹ thuật cốt lõi:</strong> Three-Minute Breathing Space (3MB) và Body Scan. Thực hành kỹ thuật STOP. Mục tiêu: có công cụ "cứu hộ" dùng được ngay giữa học bài.</p>
+            <p><strong>Buổi 3 – Vận động & Điều hòa:</strong> Chuỗi Relaxing Flow + Grounding Flow (15 phút). Thở luân phiên Nadi Shodhana. Mục tiêu: giải phóng căng thẳng cơ thể tích lũy, tăng vagal tone.</p>
+            <p><strong>Buổi 4 – Tích hợp vào đời sống:</strong> Everyday Mindfulness trong thói quen học tập. Thiền tâm từ ngắn. Lập cam kết thực hành sau khóa. Theo dõi tiến trình qua nhật ký cảm xúc ngắn hàng ngày.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== TÌNH HUỐNG 1 – NHẬN DIỆN MODE =========== -->
+      <div class="essay-card" data-type="mode">
+        <div class="essay-card-header">
+          <span class="essay-tag tag-scenario-mode">🔍 Nhận Diện Mode</span>
+          <h3>Tình huống: Minh và bài kiểm tra</h3>
+          <span class="clo-badge">CLO3 · CLO4</span>
+        </div>
+        <div class="essay-body">
+          <div class="scenario-box">
+            <span class="scene-label">📖 Tình Huống</span>
+            Minh (22 tuổi, sinh viên năm 3) vừa nhận được điểm kiểm tra thấp hơn mong đợi. Ngay lập tức, Minh bắt đầu ngồi phân tích từng câu mình làm sai, liệt kê lý do thất bại, tự hỏi "Mình đã học đủ chưa?", "Nếu cứ thế này thì tốt nghiệp không nổi?", rồi lên kế hoạch học bù ngay trong đêm. Tim đập nhanh, vai cứng, khó tập trung nhưng Minh vẫn tiếp tục ngồi phân tích và lên kế hoạch.
+          </div>
+          <div class="guide-section">
+            <span class="guide-label">❓ Câu hỏi thảo luận</span>
+            <ul class="kw-list">
+              <li>Minh đang ở trạng thái Mode nào? Vì sao?</li>
+              <li>Trạng thái hệ thần kinh của Minh (theo Polyvagal Theory) là gì?</li>
+              <li>Nếu tiếp tục như vậy, điều gì có thể xảy ra với Minh?</li>
+              <li>Đề xuất 2–3 kỹ thuật cụ thể có thể hỗ trợ Minh lúc này và giải thích tại sao.</li>
+            </ul>
+          </div>
+          <textarea class="essay-textarea" placeholder="Phân tích tình huống và đề xuất kỹ thuật hỗ trợ..."></textarea>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">👁 Xem gợi ý phân tích</button>
+          <div class="model-answer">
+            <span class="ma-label">💡 Gợi Ý Phân Tích</span>
+            <div class="mode-verdict mode-doing">⚙️ DOING MODE – Trội hoàn toàn</div>
+            <p><strong>Nhận diện Mode:</strong> Minh đang ở <strong>Doing Mode</strong> – tâm trí hướng đến phân tích, sửa chữa, lập kế hoạch. Dấu hiệu: liệt kê lý do thất bại, lên kế hoạch học bù, câu hỏi "phải làm gì tiếp theo". Trong bối cảnh cảm xúc đang cao (điểm thấp, thất vọng), Doing Mode khuếch đại stress thay vì giải quyết.</p>
+            <p><strong>Trạng thái Polyvagal:</strong> <strong>Sympathetic</strong> – tim đập nhanh, vai cứng là tín hiệu hệ giao cảm đang kích hoạt. Hệ thần kinh đang trong trạng thái phòng vệ, không phải học tập.</p>
+            <p><strong>Nếu tiếp tục:</strong> Rumination leo thang → overthinking về tương lai → cortisol tăng kéo dài → khó ngủ, suy kiệt, giảm hiệu suất học tập thực sự.</p>
+            <p><strong>Kỹ thuật đề xuất:</strong></p>
+            <div class="technique-chips">
+              <span class="tech-chip">1. Kỹ thuật STOP</span>
+              <span class="tech-chip">2. Thở bụng (Diaphragmatic)</span>
+              <span class="tech-chip">3. Three-Minute Breathing Space</span>
+            </div>
+            <p><strong>Lý giải:</strong> (1) <strong>STOP</strong> tạo khoảng dừng ngay lập tức – giúp Minh nhận ra mình đang phản ứng tự động. (2) <strong>Thở bụng</strong> kích hoạt hệ đối giao cảm, giảm nhịp tim và cơ căng – can thiệp trực tiếp vào sinh lý trước khi suy nghĩ. (3) <strong>3MB</strong> (Nhận biết → Quy tụ → Mở rộng) giúp Minh ra khỏi vòng xoáy phân tích và quay về hiện tại. Sau khi hệ thần kinh ổn định hơn, Minh mới có thể lập kế hoạch học hiệu quả.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== TÌNH HUỐNG 2 – NHẬN DIỆN MODE =========== -->
+      <div class="essay-card" data-type="mode">
+        <div class="essay-card-header">
+          <span class="essay-tag tag-scenario-mode">🔍 Nhận Diện Mode</span>
+          <h3>Tình huống: Lan và cơn lo âu ban đêm</h3>
+          <span class="clo-badge">CLO3 · CLO4</span>
+        </div>
+        <div class="essay-body">
+          <div class="scenario-box">
+            <span class="scene-label">📖 Tình Huống</span>
+            Lan (24 tuổi) nằm trên giường lúc 12 giờ đêm, không ngủ được. Đầu óc cô liên tục chạy qua những cuộc trò chuyện hôm nay: "Mình có nói điều gì sai không?", "Họ có ghét mình không?", "Ngày mai phải làm gì nếu họ không thích mình?". Cô biết những suy nghĩ này không giúp được gì nhưng không thể dừng lại. Lan thở dài và quyết định… viết danh sách tất cả những điều mình cần sửa để không bị ghét.
+          </div>
+          <div class="guide-section">
+            <span class="guide-label">❓ Câu hỏi thảo luận</span>
+            <ul class="kw-list">
+              <li>Nhận diện Mode Lan đang ở và giải thích cơ chế tâm lý đang diễn ra</li>
+              <li>Phản ứng "viết danh sách cần sửa" của Lan có hữu ích không? Vì sao?</li>
+              <li>Đặt tên cho cơ chế tâm lý cụ thể đang duy trì trạng thái này</li>
+              <li>Đề xuất can thiệp phù hợp và giải thích cơ chế hoạt động của kỹ thuật đó</li>
+            </ul>
+          </div>
+          <textarea class="essay-textarea" placeholder="Phân tích tình huống và đề xuất kỹ thuật hỗ trợ..."></textarea>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">👁 Xem gợi ý phân tích</button>
+          <div class="model-answer">
+            <span class="ma-label">💡 Gợi Ý Phân Tích</span>
+            <div class="mode-verdict mode-doing">⚙️ DOING MODE – Kích hoạt lúc cảm xúc cao</div>
+            <p><strong>Nhận diện Mode:</strong> Lan đang ở <strong>Doing Mode</strong> với đặc trưng là phân tích ("có nói sai không?"), lập kế hoạch sửa chữa (viết danh sách), dự đoán tương lai tiêu cực. Đây là Doing Mode kết hợp với lo âu xã hội.</p>
+            <p><strong>Cơ chế tâm lý:</strong> <strong>Rumination</strong> – suy nghĩ lặp đi lặp lại về tiêu cực mà không hướng đến giải quyết. Teasdale et al. (1995) chỉ ra đây là yếu tố cốt lõi duy trì lo âu và trầm cảm. DMN (Default Mode Network) đang hoạt động mạnh.</p>
+            <p><strong>Hành động viết danh sách:</strong> Không hữu ích trong lúc này. Mặc dù trông có vẻ "hành động", đây vẫn là Doing Mode – cố sửa chữa từ bên trong vòng xoáy lo âu. Não đang trong trạng thái kích hoạt giao cảm, không phải trạng thái phù hợp để ra quyết định tốt.</p>
+            <p><strong>Kỹ thuật đề xuất:</strong></p>
+            <div class="technique-chips">
+              <span class="tech-chip">1. Thở 4-7-8 (ngay lúc này)</span>
+              <span class="tech-chip">2. Body Scan nhẹ</span>
+              <span class="tech-chip">3. Choiceless Awareness</span>
+            </div>
+            <p><strong>Lý giải:</strong> (1) <strong>Thở 4-7-8</strong> với thì thở ra dài (8s) kích hoạt vagus nerve → tăng vagal tone → giảm nhịp tim và lo âu ngay lập tức. Phù hợp để dùng trên giường. (2) <strong>Body Scan</strong> chuyển sự chú ý từ suy nghĩ (Doing) về cảm giác thân thể (Being), ngắt vòng rumination. (3) <strong>Choiceless Awareness</strong> giúp Lan quan sát suy nghĩ mà không bám vào chúng – nhận ra suy nghĩ chỉ là "sự kiện tâm trí", không phải sự thật về mối quan hệ xã hội của cô.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== TÌNH HUỐNG 3 – NHẬN DIỆN MODE =========== -->
+      <div class="essay-card" data-type="mode">
+        <div class="essay-card-header">
+          <span class="essay-tag tag-scenario-mode">🔍 Nhận Diện Mode</span>
+          <h3>Tình huống: Nam sau buổi thiền</h3>
+          <span class="clo-badge">CLO2 · CLO3</span>
+        </div>
+        <div class="essay-body">
+          <div class="scenario-box">
+            <span class="scene-label">📖 Tình Huống</span>
+            Nam (26 tuổi) đã theo học một khóa thiền chánh niệm được 3 tuần. Hôm nay sau buổi thực hành Body Scan, Nam chia sẻ: "Em ngồi thiền xong vẫn không cảm thấy gì đặc biệt. Em cứ cố tập trung vào hơi thở nhưng tâm trí cứ lang thang. Em cố gắng không để bị phân tâm nhưng càng cố càng khó hơn. Có lẽ em không có khả năng thiền."
+          </div>
+          <div class="guide-section">
+            <span class="guide-label">❓ Câu hỏi thảo luận</span>
+            <ul class="kw-list">
+              <li>Nam đang tiếp cận việc thiền với Mode nào? Biểu hiện cụ thể nào cho thấy điều đó?</li>
+              <li>Nam đang có hiểu lầm gì về bản chất của chánh niệm? Giải thích đúng theo MBCT.</li>
+              <li>Đâu là dấu hiệu Being Mode trong thực hành thiền?</li>
+              <li>Bạn sẽ hướng dẫn Nam như thế nào để chuyển sang Being Mode?</li>
+            </ul>
+          </div>
+          <textarea class="essay-textarea" placeholder="Phân tích tình huống và hướng dẫn chuyển mode..."></textarea>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">👁 Xem gợi ý phân tích</button>
+          <div class="model-answer">
+            <span class="ma-label">💡 Gợi Ý Phân Tích</span>
+            <div class="mode-verdict mode-doing">⚙️ DOING MODE trong thực hành thiền</div>
+            <p><strong>Nam đang tiếp cận thiền bằng Doing Mode:</strong> Biểu hiện – "cố tập trung", "cố không để bị phân tâm", mong đợi "cảm thấy gì đặc biệt", đánh giá mình "không có khả năng thiền". Đây là đặc trưng của Doing Mode: hướng đến mục tiêu, phân tích kết quả, tự phán xét.</p>
+            <p><strong>Hiểu lầm về chánh niệm:</strong> Nam cho rằng thiền thành công = không có suy nghĩ lang thang. Theo MBCT, suy nghĩ lang thang là <strong>hoạt động tự nhiên của tâm trí</strong>. Thực hành thiền không phải là ngăn suy nghĩ, mà là <strong>nhận ra khi tâm trí lang thang và nhẹ nhàng đưa về</strong> – không phán xét bản thân. Mỗi lần "trở về" chính là một lần thực hành thành công.</p>
+            <p><strong>Being Mode trong thiền:</strong> Không có mục tiêu đạt được trạng thái đặc biệt. Chú ý hơi thở như nó đang là (không điều khiển). Khi tâm trí lang thang → nhận ra → nhẹ nhàng trở về (với thái độ tò mò, không tự trách). Không đánh giá hơi thở "tốt" hay "không tốt".</p>
+            <p><strong>Hướng dẫn chuyển Being Mode:</strong> (1) Reframe: "Tâm trí lang thang là bình thường – mỗi lần bạn nhận ra là bạn đang thực hành chánh niệm." (2) Nhắc nhở: thiền không có nghĩa là trạng thái tốt hay xấu – chỉ là quan sát. (3) Thực hành Mindful Breathing với hướng dẫn: "Chú ý hơi thở như nó đang là, không cố thay đổi, không phán xét." (4) Giới thiệu 3MB – ngắn hơn, ít áp lực hơn để bắt đầu.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== TÌNH HUỐNG 4 – THỰC TẾ =========== -->
+      <div class="essay-card" data-type="scenario">
+        <div class="essay-card-header">
+          <span class="essay-tag tag-scenario">🎬 Tình Huống Thực Tế</span>
+          <h3>Tình huống: Tuấn và cuộc xung đột với đồng nghiệp</h3>
+          <span class="clo-badge">CLO4 · CLO5</span>
+        </div>
+        <div class="essay-body">
+          <div class="scenario-box">
+            <span class="scene-label">📖 Tình Huống</span>
+            Tuấn (28 tuổi, nhân viên văn phòng) đang trong cuộc họp khi đồng nghiệp phủ nhận đóng góp của anh trước mặt sếp. Tuấn cảm thấy mặt nóng bừng, tim đập mạnh, tay hơi run. Ngay lập tức anh muốn phản bác gay gắt. Tuy nhiên, anh chợt nhớ đến kỹ thuật đã học trong khóa chánh niệm.
+          </div>
+          <div class="guide-section">
+            <span class="guide-label">❓ Câu hỏi thảo luận</span>
+            <ul class="kw-list">
+              <li>Xác định trạng thái sinh lý–tâm lý của Tuấn theo mô hình đã học</li>
+              <li>Nếu Tuấn phản bác ngay lập tức, đó là phản ứng Reactive hay Responsive? Hậu quả?</li>
+              <li>Tuấn nên áp dụng kỹ thuật nào trong vài giây tới? Mô tả cụ thể từng bước.</li>
+              <li>Sau cuộc họp, Tuấn có thể dùng thêm kỹ thuật gì để xử lý cảm xúc còn lại?</li>
+            </ul>
+          </div>
+          <textarea class="essay-textarea" placeholder="Phân tích và đề xuất can thiệp theo trình tự thời gian..."></textarea>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">👁 Xem gợi ý phân tích</button>
+          <div class="model-answer">
+            <span class="ma-label">💡 Gợi Ý Phân Tích</span>
+            <p><strong>Trạng thái của Tuấn:</strong> Hệ giao cảm kích hoạt mạnh (Sympathetic) – biểu hiện: mặt nóng, tim đập mạnh, tay run. Theo Polyvagal Theory, Tuấn ở trạng thái sympathetic, đang trong phản ứng Fight (xu hướng phản bác). Amygdala đang chiếm ưu thế, prefrontal cortex (tư duy lý trí) bị ức chế.</p>
+            <p><strong>Phản ứng Reactive:</strong> Phản bác gay gắt ngay là <strong>Reactive</strong> – phản ứng tự động theo chương trình thần kinh cổ xưa. Hậu quả: leo thang xung đột, tổn hại quan hệ với sếp và đồng nghiệp, hối hận sau đó.</p>
+            <p><strong>Kỹ thuật ngay lập tức – STOP:</strong></p>
+            <div class="technique-chips">
+              <span class="tech-chip">S – Dừng lại (im lặng 3-5 giây)</span>
+              <span class="tech-chip">T – Hít thở sâu 1-2 lần</span>
+              <span class="tech-chip">O – Quan sát cảm giác nóng, nhịp tim</span>
+              <span class="tech-chip">P – Chọn cách phản hồi có ý thức</span>
+            </div>
+            <p>Thì thở ra dài (kỹ thuật thở 4-7 đơn giản) giúp kích hoạt vagus nerve ngay tại chỗ, giảm nhịp tim đủ để prefrontal cortex "bật lại".</p>
+            <p><strong>Sau cuộc họp:</strong> (1) <strong>Mindful Breathing</strong> 5 phút trong phòng vệ sinh để hạ nhiệt hoàn toàn. (2) <strong>Viết phản tư</strong> – quan sát cảm xúc giận còn lại mà không bị cuốn vào rumination. (3) <strong>Grounding</strong> – đi bộ chậm, cảm nhận bàn chân chạm đất, tái lập cân bằng ANS trước khi quyết định bước tiếp theo.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== TÌNH HUỐNG 5 – NHẬN DIỆN MODE =========== -->
+      <div class="essay-card" data-type="mode">
+        <div class="essay-card-header">
+          <span class="essay-tag tag-scenario-mode">🔍 Nhận Diện Mode</span>
+          <h3>Tình huống: Hà và bữa sáng</h3>
+          <span class="clo-badge">CLO2 · CLO4</span>
+        </div>
+        <div class="essay-body">
+          <div class="scenario-box">
+            <span class="scene-label">📖 Tình Huống</span>
+            Hà (21 tuổi) ngồi ăn sáng nhưng mắt nhìn điện thoại, tai nghe podcast học tiếng Anh, tay cầm bút ghi chú bài. Khi ăn xong, cô không nhớ mình đã ăn gì và không cảm thấy no. Hà cho rằng đây là "tận dụng thời gian tối đa" và cảm thấy tự hào về hiệu suất của mình.
+          </div>
+          <div class="guide-section">
+            <span class="guide-label">❓ Câu hỏi thảo luận</span>
+            <ul class="kw-list">
+              <li>Hà đang ở Mode nào? Dấu hiệu cụ thể là gì?</li>
+              <li>Hành vi này có vấn đề gì không theo góc nhìn chánh niệm?</li>
+              <li>"Everyday Mindfulness" trong MBCT đề xuất điều gì cho tình huống này?</li>
+              <li>Hà có thể thực hành chánh niệm trong bữa sáng như thế nào mà không cần bỏ thói quen học?</li>
+            </ul>
+          </div>
+          <textarea class="essay-textarea" placeholder="Phân tích và đề xuất cách thực hành chánh niệm..."></textarea>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">👁 Xem gợi ý phân tích</button>
+          <div class="model-answer">
+            <span class="ma-label">💡 Gợi Ý Phân Tích</span>
+            <div class="mode-verdict mode-doing">⚙️ DOING MODE – Automatic Pilot</div>
+            <p><strong>Nhận diện Mode:</strong> Hà ở <strong>Doing Mode kết hợp Automatic Pilot</strong> – làm nhiều việc cùng lúc, tâm trí hướng về mục tiêu (học tiếng Anh, ghi chú), không hiện diện với trải nghiệm thực tế đang xảy ra (bữa sáng).</p>
+            <p><strong>Vấn đề theo góc nhìn chánh niệm:</strong> Hà không nhận biết được cảm giác thân thể (không nhớ ăn gì, không cảm thấy no). Điều này: (1) giảm khả năng nhận biết tín hiệu cơ thể – nền tảng của body awareness và điều hòa cảm xúc; (2) mất "vòng lặp nhận biết" trong ngày – MBCT nhấn mạnh rằng Everyday Mindfulness giúp nhận ra stress từ giai đoạn sớm; (3) về lâu dài có thể làm giảm khả năng hiện diện và tăng căng thẳng tích lũy.</p>
+            <p><strong>Everyday Mindfulness (MBCT):</strong> Chánh niệm không cần thêm thời gian riêng – có thể tích hợp vào hoạt động hằng ngày. MBCT đề xuất: ăn có chánh niệm, đi bộ có chánh niệm, rửa chén có chánh niệm.</p>
+            <p><strong>Đề xuất thực tiễn:</strong> Không cần bỏ podcast hoàn toàn. Hà có thể: (1) Ăn 3 miếng đầu tiên hoàn toàn có chánh niệm – cảm nhận mùi, vị, kết cấu thức ăn; (2) Thỉnh thoảng dừng podcast 30 giây, chú ý hơi thở và cảm giác no/đói; (3) Đây là "vòng lặp nhận biết" nhỏ giúp hệ thần kinh không ở chế độ autopilot liên tục.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========== TÌNH HUỐNG 6 – THỰC TẾ =========== -->
+      <div class="essay-card" data-type="scenario">
+        <div class="essay-card-header">
+          <span class="essay-tag tag-scenario">🎬 Tình Huống Thực Tế</span>
+          <h3>Tình huống: Thiết kế can thiệp cho nhóm người cao tuổi</h3>
+          <span class="clo-badge">CLO4 · CLO5</span>
+        </div>
+        <div class="essay-body">
+          <div class="scenario-box">
+            <span class="scene-label">📖 Tình Huống</span>
+            Bạn là chuyên viên tâm lý tại một trung tâm dưỡng lão. Nhóm thân chủ gồm 8 người cao tuổi (65–80 tuổi), nhiều người có vấn đề vận động, một số có huyết áp không ổn định, đa phần cảm thấy cô đơn và thiếu mục đích sống sau khi nghỉ hưu. Bạn được yêu cầu thiết kế một buổi can thiệp chánh niệm–yoga 45 phút phù hợp cho nhóm này.
+          </div>
+          <div class="guide-section">
+            <span class="guide-label">❓ Câu hỏi thảo luận</span>
+            <ul class="kw-list">
+              <li>Phân tích những yếu tố đặc thù của nhóm thân chủ này cần lưu ý</li>
+              <li>Kỹ thuật nào trong chương trình học PHÙ HỢP và kỹ thuật nào cần TRÁNH? Vì sao?</li>
+              <li>Thiết kế lịch trình 45 phút chi tiết với lý giải cho từng phần</li>
+              <li>Chánh niệm có thể hỗ trợ vấn đề cô đơn và thiếu mục đích như thế nào?</li>
+            </ul>
+          </div>
+          <textarea class="essay-textarea" placeholder="Thiết kế can thiệp và lý giải..."></textarea>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">👁 Xem gợi ý phân tích</button>
+          <div class="model-answer">
+            <span class="ma-label">💡 Gợi Ý Phân Tích</span>
+            <p><strong>Yếu tố đặc thù cần lưu ý:</strong> Hạn chế vận động → tránh tư thế đứng, thăng bằng phức tạp; Huyết áp không ổn định → tránh kỹ thuật thở mạnh (Kapalabhati), tránh thở nín thở dài; Cô đơn → cần tạo kết nối xã hội trong buổi; Mục đích sống → Loving-kindness có thể giúp nuôi dưỡng ý nghĩa.</p>
+            <p><strong>Phù hợp:</strong> Thở bụng, Body Scan (ngồi/nằm), Mindful Breathing, Thiền tâm từ, Savasana, vận động nhẹ ngồi (seated yoga). <strong>Cần tránh/điều chỉnh:</strong> Grounding Flow đứng một chân → thay bằng seated version; Thở 4-7-8 cần thận trọng với huyết áp không ổn định; Choiceless Awareness có thể gây mất phương hướng nếu có suy giảm nhận thức nhẹ.</p>
+            <p><strong>Lịch trình 45 phút:</strong></p>
+            <p>• <strong>0–8 phút:</strong> Check-in nhóm (mỗi người chia sẻ 1 từ về cảm giác hiện tại) + Psychoeducation ngắn gọn về chánh niệm.</p>
+            <p>• <strong>8–18 phút:</strong> Thở bụng (5 phút) + Body Scan ngồi (5 phút) – tạo an toàn sinh lý, kết nối với cơ thể.</p>
+            <p>• <strong>18–30 phút:</strong> Seated yoga nhẹ – vận động cổ, vai, cánh tay, thở phối hợp. Không có tư thế đứng.</p>
+            <p>• <strong>30–40 phút:</strong> Thiền tâm từ (Loving-kindness) – gửi yêu thương đến bản thân, người thân, nhóm. Đặc biệt phù hợp để giảm cô đơn và tạo kết nối.</p>
+            <p>• <strong>40–45 phút:</strong> Savasana ngắn 3 phút + chia sẻ nhóm – điều gì bạn nhận ra hôm nay?</p>
+            <p><strong>Chánh niệm và cô đơn:</strong> Thiền tâm từ nuôi dưỡng cảm giác kết nối và lòng biết ơn; Thực hành nhóm tạo cộng đồng hỗ trợ; Chánh niệm giúp tìm thấy ý nghĩa trong những khoảnh khắc nhỏ của cuộc sống hàng ngày.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end essay-grid -->
+  </div><!-- end essay section -->
+
+</div><!-- end main -->
+
+<script>
+// ===== TAB NAVIGATION =====
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== WIKI TOGGLE =====
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+// ===== QUIZ DATA =====
+const allQuestions = [
+  // CONCEPT
+  { cat:'concept', q:'Theo định nghĩa trong MBCT, chánh niệm (mindfulness) là gì?', opts:['Kỹ thuật làm trống tâm trí khỏi mọi suy nghĩ','Khả năng chú ý có chủ ý, trong hiện tại, với thái độ không phán xét','Phương pháp kiểm soát cảm xúc tiêu cực','Thực hành thư giãn và thiền định sâu'], ans:1, exp:'Chánh niệm được định nghĩa qua 3 yếu tố cốt lõi: tính có chủ ý của sự chú ý, tính hiện tại của trải nghiệm, và chất lượng thái độ không phán xét. Mindfulness KHÔNG nhằm làm trống tâm trí.' },
+  { cat:'concept', q:'Học phần TLH068 "Chánh niệm, Yoga và Sức khỏe tinh thần" thuộc khối kiến thức nào?', opts:['Đại cương','Cơ sở ngành','Chuyên ngành bắt buộc','Kỹ năng mềm'], ans:1, exp:'Theo đề cương, học phần thuộc khối kiến thức Cơ sở ngành, là môn tự chọn chuyên ngành trong chương trình Cử nhân Tâm lý học (TLH068).' },
+  { cat:'concept', q:'MBCT được phát triển bởi ai?', opts:['Herbert Benson và Walter Cannon','Jon Kabat-Zinn','Segal, Williams và Teasdale','Stephen Porges và Richard Lazarus'], ans:2, exp:'MBCT (Mindfulness-Based Cognitive Therapy) được phát triển bởi Segal, Williams và Teasdale, dựa trên sự kết hợp giữa CBT truyền thống và thực hành chánh niệm.' },
+  { cat:'concept', q:'Mục tiêu chính của MBCT trong điều trị tâm lý là gì?', opts:['Loại bỏ hoàn toàn cảm xúc tiêu cực','Phòng ngừa tái phát trầm cảm','Tăng cường nhận thức tích cực','Kiểm soát hành vi xung động'], ans:1, exp:'MBCT được xem là một trong những phương pháp có bằng chứng mạnh nhất hiện nay trong phòng ngừa tái phát trầm cảm, với hiệu quả tương đương hoặc vượt trội so với việc duy trì thuốc ở một số nhóm bệnh nhân.' },
+  { cat:'concept', q:'Điểm khác biệt chính giữa MBCT và CBT truyền thống là gì?', opts:['MBCT sử dụng thuốc hỗ trợ','CBT tập trung thay đổi nội dung suy nghĩ; MBCT thay đổi mối quan hệ với suy nghĩ','MBCT chỉ dành cho người lớn tuổi','CBT không dùng hơi thở'], ans:1, exp:'CBT truyền thống tập trung vào việc thay đổi nội dung suy nghĩ (cognitive restructuring). MBCT hướng đến việc thay đổi mối quan hệ của cá nhân với suy nghĩ và cảm xúc – nhìn chúng như sự kiện tâm trí, không phải sự thật.' },
+
+  // STRESS
+  { cat:'stress', q:'Hệ thần kinh tự động (ANS) gồm 2 nhánh chính. Nhánh nào có vai trò thư giãn, phục hồi?', opts:['Hệ thần kinh giao cảm (Sympathetic)','Hệ thần kinh đối giao cảm (Parasympathetic)','Hệ thần kinh trung ương','Hệ thần kinh soma'], ans:1, exp:'Hệ thần kinh đối giao cảm (Parasympathetic) liên quan đến thư giãn, phục hồi và tái tạo năng lượng. Trong khi đó, hệ giao cảm kích hoạt cơ thể và chuẩn bị cho hành động trong stress.' },
+  { cat:'stress', q:'Walter Cannon (1929) mô tả cơ chế sinh tồn gồm mấy phản ứng?', opts:['2 (Fight và Flight)','3 (Fight, Flight, Freeze)','4 (Fight, Flight, Freeze, Fawn)','5 phản ứng'], ans:1, exp:'Walter Cannon (1929) là người đầu tiên mô tả phản ứng Fight–Flight–Freeze (chiến đấu–bỏ chạy–đóng băng) như cơ chế sinh tồn tự động của con người trước mối đe dọa.' },
+  { cat:'stress', q:'Trục HPA trong phản ứng stress gồm những cấu trúc nào?', opts:['Hippocampus–Prefrontal–Amygdala','Hypothalamus–Pituitary–Adrenal','Hippocampus–Pituitary–Amygdala','Hypothalamus–Prefrontal–Adrenal'], ans:1, exp:'Trục HPA: Hypothalamus (vùng dưới đồi) → Pituitary (tuyến yên) → Adrenal (tuyến thượng thận). Đây là con đường giải phóng cortisol khi amygdala nhận diện mối đe dọa.' },
+  { cat:'stress', q:'Cortisol ở mức cao kéo dài (mãn tính) chủ yếu gây tổn thương vùng não nào?', opts:['Amygdala','Prefrontal Cortex','Hippocampus','Cerebellum'], ans:2, exp:'Cortisol mãn tính ở mức cao có thể gây tổn thương hippocampus – vùng não liên quan đến trí nhớ và điều hòa cảm xúc. Đây là cơ chế giải thích tại sao stress mãn tính gây suy giảm trí nhớ và khó kiểm soát cảm xúc.' },
+  { cat:'stress', q:'Khái niệm "Allostatic Load" do ai đề xuất và có nghĩa là gì?', opts:['Lazarus (1991) – mô hình đánh giá nhận thức','McEwen (1998) – gánh nặng sinh học tích lũy từ stress mãn tính','Cannon (1929) – phản ứng Fight-Flight-Freeze','Porges (2011) – lý thuyết Polyvagal'], ans:1, exp:'McEwen (1998) đề xuất khái niệm Allostatic Load để mô tả "gánh nặng sinh học" mà cơ thể phải chịu khi liên tục thích nghi với stress. Khi vượt ngưỡng, các hệ thống sinh lý bắt đầu suy yếu.' },
+  { cat:'stress', q:'Theo Polyvagal Theory (Porges, 2011), trạng thái "ventral vagal" gắn với điều gì?', opts:['Phản ứng đóng băng và tê liệt','Phản ứng chiến đấu hoặc bỏ chạy','Cảm giác an toàn, kết nối xã hội và học tập hiệu quả','Suy kiệt và shut-down'], ans:2, exp:'Polyvagal Theory mô tả 3 trạng thái: Ventral vagal (an toàn, kết nối), Sympathetic (fight/flight), Dorsal vagal (tê liệt, shutdown). Chánh niệm/yoga giúp chuyển từ trạng thái phòng vệ sang ventral vagal.' },
+  { cat:'stress', q:'Quá trình "neuroception" trong Polyvagal Theory là gì?', opts:['Cách não xử lý ký ức dài hạn','Hệ thần kinh không ngừng quét môi trường tìm tín hiệu an toàn/đe dọa','Phản ứng tự động của amygdala với nguy hiểm','Cơ chế tiết cortisol từ tuyến thượng thận'], ans:1, exp:'Neuroception là quá trình hệ thần kinh không ngừng quét môi trường để tìm kiếm tín hiệu an toàn hay đe dọa, diễn ra ngoài ý thức. Dựa trên các tín hiệu này, cơ thể tự động chuyển đổi trạng thái.' },
+  { cat:'stress', q:'Theo mô hình Lazarus (1991), stress phụ thuộc vào điều gì?', opts:['Chỉ vào áp lực khách quan từ môi trường bên ngoài','Mức độ cortisol trong máu','Cách cá nhân đánh giá tình huống (primary & secondary appraisal)','Tuổi tác và gen di truyền'], ans:2, exp:'Lazarus đề xuất quá trình đánh giá hai bước: Primary appraisal (tình huống có đe dọa không?) và Secondary appraisal (tôi có đủ nguồn lực đối phó không?). Stress phụ thuộc chủ yếu vào cách cá nhân gán ý nghĩa, không chỉ bản thân sự kiện.' },
+  { cat:'stress', q:'Dấu hiệu sớm nhất và quan trọng nhất của stress theo tài liệu là gì?', opts:['Đau đầu và mệt mỏi','Thay đổi trong hơi thở (từ thở bụng sang thở ngực, nhanh và nông hơn)','Mất ngủ và lo âu','Cáu gắt và khó tập trung'], ans:1, exp:'Hơi thở là "điểm vào" quan trọng nhất để can thiệp vào hệ thần kinh tự động. Khi stress, hơi thở chuyển từ thở bụng sang thở ngực, nhanh và nông, làm giảm CO₂ trong máu, tạo vòng phản hồi làm stress trầm trọng hơn.' },
+
+  // MINDFULNESS
+  { cat:'mindfulness', q:'Kỹ thuật "Three-Minute Breathing Space (3MB)" trong MBCT gồm mấy bước?', opts:['2 bước: Nhận biết và Hơi thở','3 bước: Nhận biết – Quy tụ – Mở rộng','4 bước: Stop-Take-Observe-Proceed','5 bước theo mô hình MBSR'], ans:1, exp:'3MB gồm 3 bước: A(wareness) – Nhận biết điều đang diễn ra; B(reathing/Gathering) – Quy tụ về hơi thở; E(xpanding) – Mở rộng ra toàn thân và bối cảnh xung quanh.' },
+  { cat:'mindfulness', q:'"Decentering" trong MBCT có nghĩa là gì?', opts:['Trở nên vô cảm với cảm xúc','Nhìn suy nghĩ như sự kiện tâm trí, không phải sự thật tuyệt đối','Tập trung vào điểm trung tâm của hơi thở','Loại bỏ suy nghĩ tiêu cực'], ans:1, exp:'Decentering là khả năng nhìn suy nghĩ như "sự kiện tâm trí" thay vì sự thật. Nó đại diện cho sự chuyển dịch từ "tôi là cảm xúc" sang "tôi có cảm xúc". Đây là một trong 4 mục tiêu tâm lý cốt lõi của MBCT.' },
+  { cat:'mindfulness', q:'Body Scan (quét cơ thể) trong MBCT có mục đích chính là gì?', opts:['Thư giãn cơ bắp sau vận động','Phát triển body awareness để phát hiện stress sớm và điều hòa cảm xúc','Chuẩn bị cho thiền ngủ','Giảm cân và tăng linh hoạt'], ans:1, exp:'Body Scan giúp phát triển nhận biết cơ thể (body awareness). Nghiên cứu Farb et al. (2012) cho thấy khả năng nhận biết cảm giác thân thể liên quan đến mức trầm cảm thấp hơn và điều hòa cảm xúc tốt hơn.' },
+  { cat:'mindfulness', q:'Arch & Craske (2006) phát hiện rằng chỉ với 15 phút mindful breathing, người tham gia đã...', opts:['Giải quyết được hoàn toàn các vấn đề tâm lý','Đạt được trạng thái thiền sâu','Giảm phản ứng cảm xúc tiêu cực và tăng khả năng quan sát cảm xúc khó chịu','Có thể kiểm soát hoàn toàn cảm xúc'], ans:2, exp:'Arch & Craske (2006) cho thấy chỉ 15 phút mindful breathing đã giúp giảm phản ứng cảm xúc tiêu cực, tăng khả năng quan sát cảm xúc khó chịu mà không né tránh, và cải thiện điều hòa cảm xúc so với nhóm đối chứng.' },
+  { cat:'mindfulness', q:'Default Mode Network (DMN) trong não liên quan đến điều gì và chánh niệm tác động thế nào?', opts:['DMN điều phối vận động; chánh niệm tăng DMN','DMN liên quan rumination/suy nghĩ lan man; chánh niệm giảm hoạt động DMN','DMN xử lý cảm xúc; chánh niệm không ảnh hưởng','DMN kiểm soát hơi thở; chánh niệm tăng cường DMN'], ans:1, exp:'Brewer et al. (2011) cho thấy chánh niệm giảm hoạt động của DMN – mạng lưới liên quan đến suy nghĩ lan man, tự trách và rumination. Giảm DMN giúp cá nhân ít bị cuốn vào chuỗi suy nghĩ tiêu cực.' },
+  { cat:'mindfulness', q:'Nghiên cứu Hölzel et al. (2011) sau chương trình MBSR phát hiện điều gì về não bộ?', opts:['Amygdala tăng kích thước','Hippocampus tăng độ dày và hoạt hóa amygdala giảm','Prefrontal cortex thu nhỏ lại','Không có thay đổi cấu trúc nào'], ans:1, exp:'Hölzel et al. (2011) ghi nhận: Hippocampus tăng độ dày (liên quan trí nhớ & điều hòa cảm xúc), hoạt hóa amygdala giảm, và hoạt động prefrontal cortex tăng – hỗ trợ khả năng kiểm soát chú ý và hành vi.' },
+  { cat:'mindfulness', q:'Trong MBCT, "Choiceless Awareness" (nhận biết mở rộng không chọn lựa) nhằm mục đích gì?', opts:['Chọn một đối tượng thiền định duy nhất','Quan sát tất cả trải nghiệm mà không bám vào bất kỳ đối tượng nào, phát triển cái nhìn rõ ràng','Chặn tất cả suy nghĩ tiêu cực','Tập trung hoàn toàn vào hơi thở'], ans:1, exp:'Choiceless Awareness là quan sát mọi trải nghiệm (cảm giác, suy nghĩ, âm thanh, cảm xúc) mà không chọn bám vào bất kỳ đối tượng nào. Mục đích: phát triển clear seeing, giảm phản ứng tự động, nhận ra vô thường.' },
+
+  // YOGA & HƠI THỞ
+  { cat:'yoga', q:'Trong truyền thống Yoga, Pranayama được đặt ở vị trí nào trong hệ thống thực hành?', opts:['Bước đầu tiên, trước asana','Trung gian giữa asana (tư thế) và dhyana (thiền định)','Bước cuối cùng sau thiền','Không có vị trí cụ thể'], ans:1, exp:'Pranayama được đặt ở vị trí trung gian giữa asana (thực hành thân thể) và dhyana (thiền định), phản ánh nguyên lý: khi hơi thở được điều hòa, tâm trí trở nên dễ an trú hơn.' },
+  { cat:'yoga', q:'Kỹ thuật thở "Nadi Shodhana" còn được gọi là gì?', opts:['Thở bụng (Diaphragmatic Breathing)','Thở luân phiên (Alternate Nostril Breathing)','Thở 4 thì (Box Breathing)','Kapalabhati'], ans:1, exp:'Nadi Shodhana là kỹ thuật thở luân phiên – dùng ngón cái và ngón áp út bịt lần lượt từng lỗ mũi. Có tác dụng cân bằng hai bán cầu não và tạo trạng thái trung tính trong tâm trí.' },
+  { cat:'yoga', q:'Thở bụng (Diaphragmatic Breathing) có tác dụng sinh lý gì?', opts:['Kích hoạt hệ thần kinh giao cảm, tăng tỉnh táo','Kích hoạt hệ thần kinh đối giao cảm, giảm stress','Tăng nhịp tim và huyết áp','Không có tác dụng rõ ràng lên hệ thần kinh'], ans:1, exp:'Thở bụng (cơ hoành) giúp kích hoạt hệ thần kinh đối giao cảm, tạo cảm giác an toàn sinh lý, giảm phản ứng stress. Đây là kỹ thuật cơ bản nhất trong nhóm Calming Breathing.' },
+  { cat:'yoga', q:'Kỹ thuật thở "4-7-8" có đặc điểm gì khiến nó hiệu quả trong giảm lo âu?', opts:['Tỉ lệ hít vào dài hơn thở ra','Thì thở ra (8 giây) dài hơn hít vào (4 giây) kích hoạt dây thần kinh phế vị','Giữ hơi thở dài nhất (7 giây)','Thở nhanh và mạnh'], ans:1, exp:'Trong thở 4-7-8, thì thở ra (8s) dài hơn hít vào (4s). Thở ra dài kích hoạt dây thần kinh phế vị (vagus nerve), tăng vagal tone, giảm phản ứng sợ hãi và lo âu.' },
+  { cat:'yoga', q:'Yoga được chứng minh làm tăng nồng độ chất dẫn truyền thần kinh nào, giúp giảm lo âu?', opts:['Serotonin','Dopamine','GABA','Noradrenaline'], ans:2, exp:'Streeter et al. (2007) chứng minh yoga làm tăng nồng độ GABA – chất dẫn truyền thần kinh có vai trò ức chế và làm dịu hệ thần kinh, từ đó giảm lo âu. Đây là bằng chứng sinh học về hiệu quả của yoga.' },
+  { cat:'yoga', q:'Vận động tỉnh thức (Mindful Movement) khác với thể dục thông thường ở điểm nào?', opts:['Cường độ cao hơn và kéo dài hơn','Chú trọng chất lượng hiện diện và kết nối thân–tâm, không phải thành tích','Chỉ thực hiện trong phòng tối','Không cần hơi thở'], ans:1, exp:'Mindful Movement nhấn mạnh chất lượng hiện diện, lắng nghe tín hiệu thân thể, mối liên hệ giữa chuyển động–hơi thở–tâm trí; chuyển động chậm, có chủ đích, không phán xét. Khác hoàn toàn với tập thể dục thành tích.' },
+  { cat:'yoga', q:'Savasana trong mindful movement có vai trò gì?', opts:['Đơn giản chỉ là nghỉ ngơi sau tập luyện','Là thực hành chánh niệm trị liệu – tích hợp tác động sinh lý và tâm lý, kích hoạt tối đa hệ đối giao cảm','Chuẩn bị cho buổi tập tiếp theo','Không có ý nghĩa trị liệu'], ans:1, exp:'Savasana là tư thế "không làm" – sau vận động, tạo không gian để mọi nỗ lực được buông xuống. Kích hoạt tối đa hệ đối giao cảm, tích hợp các thay đổi sinh lý và tâm lý. Kết hợp Body Scan = phương tiện tích hợp mạnh mẽ.' },
+  { cat:'yoga', q:'Chuỗi "Grounding Flow" trong vận động tỉnh thức phù hợp nhất với ai?', opts:['Người có lo âu nặng cần thư giãn ngay','Người mất tập trung, cảm giác "không ở trong thân", cần khôi phục sự vững chãi','Người mới bắt đầu tập yoga','Người cao tuổi cần tăng cường sức mạnh'], ans:1, exp:'Grounding Flow sử dụng các tư thế đứng và thăng bằng (như Tree Pose) để củng cứng sự vững chãi và tỉnh táo. Phù hợp cho người mất tập trung hoặc có cảm giác "không ở trong thân", đặc biệt sau các chuỗi thư giãn.' },
+  { cat:'yoga', q:'Yoga làm giảm cytokine viêm nào, theo nghiên cứu Kiecolt-Glaser et al. (2010)?', opts:['Adrenaline và Noradrenaline','IL-6 và TNF-α','Cortisol và ACTH','Serotonin và Dopamine'], ans:1, exp:'Kiecolt-Glaser et al. (2010) cho thấy yoga làm giảm cytokine viêm IL-6 và TNF-α, góp phần cải thiện sức khỏe tổng thể và khả năng chịu đựng stress. Đây là bằng chứng sinh học đo lường được về tác dụng của yoga.' },
+
+  // EMOTION
+  { cat:'emotion', q:'Kỹ thuật STOP trong điều hòa cảm xúc viết tắt cho điều gì?', opts:['Sense – Think – Observe – Process','Stop – Take a breath – Observe – Proceed','Stabilize – Talk – Overcome – Practice','Slow – Think – Open – Plan'], ans:1, exp:'STOP: S(top) – Dừng lại; T(ake a breath) – Thở có ý thức; O(bserve) – Quan sát thân–tâm–cảm xúc; P(roceed) – Tiếp tục với lựa chọn có ý thức. Tạo khoảng dừng tỉnh thức để giành lại quyền lựa chọn.' },
+  { cat:'emotion', q:'Trong MBCT, chánh niệm được sử dụng để làm gì với cảm xúc tiêu cực?', opts:['Loại bỏ và triệt tiêu cảm xúc tiêu cực','Kiểm soát và trấn áp cảm xúc','Thay đổi mối quan hệ với cảm xúc, không phải loại bỏ chúng','Biến cảm xúc tiêu cực thành tích cực'], ans:2, exp:'MBCT không nhằm loại bỏ hay trấn áp cảm xúc. Mục tiêu là thay đổi mối quan hệ với trải nghiệm nội tâm – nhìn cảm xúc với thái độ quan sát, cho phép và tò mò thay vì chiến đấu chống lại chúng.' },
+  { cat:'emotion', q:'Rumination (suy nghĩ nhai đi nhai lại) là yếu tố cốt lõi trong duy trì điều gì, theo Teasdale et al. (1995)?', opts:['Rối loạn lo âu xã hội','Trầm cảm và lo âu tái diễn','Rối loạn stress sau sang chấn (PTSD)','Rối loạn ăn uống'], ans:1, exp:'Nghiên cứu Teasdale, Segal và Williams (1995) chỉ ra rằng rumination là yếu tố cốt lõi trong việc duy trì trầm cảm và lo âu. MBCT được phát triển đặc biệt để ngắt vòng lặp rumination này.' },
+  { cat:'emotion', q:'Sự chuyển dịch từ "tôi là cảm xúc" sang "tôi có cảm xúc" trong MBCT gọi là gì?', opts:['Cognitive Restructuring','Decentering (tách rời khỏi suy nghĩ)','Acceptance and Commitment','Grounding'], ans:1, exp:'Decentering là quá trình chuyển từ đồng nhất hoàn toàn với cảm xúc sang khả năng quan sát chúng như hiện tượng đang diễn ra. Sự chuyển dịch này giúp cảm xúc hiện diện mà không còn điều khiển hành vi vô thức.' },
+  { cat:'emotion', q:'Grounding (nối đất) có tác dụng sinh lý gì?', opts:['Tăng kích hoạt hệ giao cảm','Giảm kích hoạt hệ giao cảm và tái lập cân bằng ANS','Trực tiếp giảm nồng độ cortisol trong máu','Tăng hoạt động của amygdala'], ans:1, exp:'Grounding đưa sự chú ý về cơ thể và môi trường hiện tại (cảm nhận bàn chân chạm đất, trọng lượng được nâng đỡ). Tác dụng: giảm kích hoạt hệ giao cảm và tái lập cân bằng ANS. Đặc biệt hữu ích khi lo âu cao.' },
+  { cat:'emotion', q:'Thiền Tâm Từ (Loving-Kindness Meditation) trong bài 7 nhằm mục đích gì?', opts:['Loại bỏ tư duy tiêu cực','Nuôi dưỡng lòng tốt lành và cảm xúc tích cực như trắc ẩn, tha thứ, biết ơn','Tăng cường trí nhớ và tập trung','Giải quyết xung đột với người khác'], ans:1, exp:'Loving-Kindness Meditation (thiền tâm từ) thực hành nuôi dưỡng lòng tốt lành và mong ước hạnh phúc cho bản thân và người khác. Kết hợp với yoga mở tim và hơi thở để khơi mở lòng trắc ẩn và tha thứ.' },
+  { cat:'emotion', q:'"Relaxation Response" (Herbert Benson, 1975) là gì?', opts:['Phản ứng tự động khi gặp nguy hiểm','Phản ứng sinh lý đối nghịch với stress, khi nhịp tim và cortisol giảm, cơ thể phục hồi','Trạng thái thiền định sâu không thể kiểm soát','Phản ứng của cơ thể khi tập thể dục'], ans:1, exp:'Herbert Benson (1975) gọi thư giãn là "Relaxation Response" – một phản ứng sinh lý đối nghịch với stress (nhịp tim giảm, cortisol giảm, cơ bắp giãn). Các thực hành thở chậm, thiền, yoga đều kích hoạt Relaxation Response.' },
+  { cat:'emotion', q:'Trong MBCT, mục tiêu điều hòa cảm xúc là gì?', opts:['Luôn bình tĩnh và tích cực mọi lúc','Học cách sống chung với trọn vẹn phổ cảm xúc một cách tỉnh thức','Tránh hoàn toàn các tình huống gây stress','Kiểm soát và che giấu cảm xúc tiêu cực'], ans:1, exp:'Theo MBCT, điều hòa cảm xúc không phải là hành trình trở nên "luôn bình tĩnh" hay "luôn tích cực", mà là quá trình học cách sống chung với trọn vẹn phổ cảm xúc của con người một cách tỉnh thức.' },
+];
+
+const flashcards = [
+  { q:'Trục HPA viết tắt cho điều gì?', a:'Hypothalamus (vùng dưới đồi) – Pituitary (tuyến yên) – Adrenal (tuyến thượng thận). Đây là con đường giải phóng cortisol khi gặp stress.' },
+  { q:'3MB trong MBCT là gì?', a:'Three-Minute Breathing Space: 3 bước — A(wareness/Nhận biết) → B(reathing/Quy tụ về hơi thở) → E(xpanding/Mở rộng ra toàn thân). Công cụ "cứu hộ" tâm lý giữa cuộc sống.' },
+  { q:'Decentering nghĩa là gì?', a:'Khả năng nhìn suy nghĩ như sự kiện tâm trí, không phải sự thật. Chuyển từ "tôi là cảm xúc" sang "tôi có cảm xúc".' },
+  { q:'Kỹ thuật STOP viết tắt cho điều gì?', a:'S(top) – Dừng lại; T(ake a breath) – Thở có ý thức; O(bserve) – Quan sát; P(roceed) – Tiếp tục có ý thức.' },
+  { q:'Nadi Shodhana là gì?', a:'Kỹ thuật thở luân phiên (Alternate Nostril Breathing) – dùng ngón cái và ngón áp út bịt lần lượt từng lỗ mũi. Cân bằng hai bán cầu não.' },
+  { q:'Allostatic Load là gì?', a:'Khái niệm McEwen (1998): "Gánh nặng sinh học" tích lũy khi cơ thể liên tục thích nghi với stress. Khi vượt ngưỡng → hệ thống sinh lý suy yếu.' },
+  { q:'Vagal tone là gì và tại sao quan trọng?', a:'Vagal tone là mức độ hoạt động của dây thần kinh phế vị. Vagal tone cao → điều hòa cảm xúc tốt hơn, giảm lo âu. Thở ra dài hơn hít vào làm tăng vagal tone.' },
+  { q:'Doing Mode vs Being Mode?', a:'Doing Mode: phân tích, sửa chữa, hướng mục tiêu → có thể gây overthinking khi stress. Being Mode: nhận biết, chấp nhận, hiện diện → tạo nền tảng sinh lý ổn định.' },
+  { q:'Fight – Flight – Freeze là gì?', a:'3 phản ứng sinh tồn tự động của Cannon (1929): Fight (chiến đấu – căng cơ đối đầu), Flight (bỏ chạy – nhịp tim tăng), Freeze (đóng băng – bất động bảo vệ).' },
+  { q:'MBCT khác CBT ở điểm gì?', a:'CBT thay đổi nội dung suy nghĩ. MBCT thay đổi mối quan hệ với suy nghĩ/cảm xúc – nhìn chúng như sự kiện tâm trí, không phải sự thật.' },
+  { q:'Rumination là gì?', a:'Suy nghĩ lặp đi lặp lại về tiêu cực. Là yếu tố cốt lõi duy trì trầm cảm/lo âu (Teasdale et al., 1995). MBCT đặc biệt nhằm ngắt vòng lặp này.' },
+  { q:'Polyvagal Theory – 3 trạng thái?', a:'1. Ventral Vagal: an toàn, kết nối xã hội, học tập. 2. Sympathetic: fight/flight, căng thẳng. 3. Dorsal Vagal: tê liệt, shutdown, kiệt sức.' },
+  { q:'Body Scan có tác dụng gì?', a:'Phát triển body awareness – phát hiện stress từ giai đoạn sớm. Nghiên cứu Farb et al. (2012): nhận biết cảm giác thân thể liên quan trầm cảm thấp hơn và điều hòa cảm xúc tốt hơn.' },
+  { q:'Savasana trong yoga trị liệu?', a:'Tư thế "không làm" – cho phép buông xuống mọi nỗ lực. Kích hoạt tối đa hệ đối giao cảm, tích hợp tác động sinh lý và tâm lý sau vận động. Không chỉ là nghỉ ngơi.' },
+  { q:'GABA có vai trò gì trong yoga?', a:'Yoga làm tăng nồng độ GABA – chất ức chế thần kinh, làm dịu hệ thần kinh, giảm lo âu (Streeter et al., 2007). Đây là cơ chế sinh học của yoga.' },
+  { q:'Relaxation Response là gì?', a:'Herbert Benson (1975): Phản ứng sinh lý đối nghịch với stress – nhịp tim giảm, cortisol giảm, cơ bắp giãn. Kích hoạt bởi: thở chậm, thiền, yoga, cầu nguyện.' },
+  { q:'Default Mode Network (DMN)?', a:'Mạng lưới não liên quan đến suy nghĩ lan man, tự trách và rumination. Chánh niệm giảm hoạt động DMN → ít bị cuốn vào suy nghĩ tiêu cực (Brewer et al., 2011).' },
+  { q:'Grounding (nối đất) là gì?', a:'Đưa sự chú ý về cơ thể và môi trường hiện tại (cảm nhận bàn chân chạm đất, v.v.). Tạo tín hiệu an toàn cho hệ thần kinh, giảm kích hoạt giao cảm, đặc biệt hữu ích khi lo âu cao.' },
+  { q:'Chuỗi Grounding Flow phù hợp với ai?', a:'Người mất tập trung, dễ hoang mang, cảm giác "không ở trong thân". Sử dụng tư thế đứng và thăng bằng (Tree Pose) để củng cố sự vững chãi.' },
+  { q:'Neuroception là gì?', a:'Quá trình hệ thần kinh không ngừng quét môi trường tìm tín hiệu an toàn/đe dọa, diễn ra ngoài ý thức. Khái niệm của Porges trong Polyvagal Theory.' },
+];
+
+// ===== QUIZ LOGIC =====
+let currentQuestions = [];
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (cat === 'all') currentQuestions = [...allQuestions];
+  else currentQuestions = allQuestions.filter(q => q.cat === cat);
+  // Shuffle
+  currentQuestions.sort(() => Math.random() - 0.5);
+  currentIndex = 0; score = 0; answered = false; userAnswers = [];
+  document.getElementById('quiz-result').classList.add('hidden');
+  renderQuestion();
+  updateMeta();
+}
+
+function renderQuestion() {
+  const container = document.getElementById('quiz-container');
+  if (currentIndex >= currentQuestions.length) {
+    showResult();
+    return;
+  }
+  const q = currentQuestions[currentIndex];
+  const letters = ['A','B','C','D'];
+  container.innerHTML = `
+    <div class="question-card">
+      <div class="question-num">Câu ${currentIndex+1} / ${currentQuestions.length}</div>
+      <div class="question-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((opt, i) => `
+          <button class="option-btn" onclick="selectAnswer(${i})" id="opt-${i}">
+            <span class="option-letter">${letters[i]}</span>
+            <span>${opt}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div id="explanation" style="display:none" class="explanation"></div>
+    </div>`;
+  answered = false;
+  document.getElementById('next-btn').style.display = currentIndex === currentQuestions.length - 1 ? 'inline-block' : 'inline-block';
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = currentQuestions[currentIndex];
+  const correct = q.ans;
+  userAnswers.push({ q: q.q, chosen: idx, correct: correct, opts: q.opts });
+  if (idx === correct) score++;
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === correct) b.classList.add('correct');
+    else if (i === idx && idx !== correct) b.classList.add('wrong');
+    else if (i !== idx && i !== correct) b.classList.add('revealed');
+  });
+  const expEl = document.getElementById('explanation');
+  expEl.style.display = 'block';
+  expEl.innerHTML = `<strong>💡 Giải thích:</strong> ${q.exp}`;
+  updateMeta();
+}
+
+function nextQuestion() {
+  if (!answered && currentIndex < currentQuestions.length) {
+    // skip
+    userAnswers.push({ q: currentQuestions[currentIndex].q, chosen: -1, correct: currentQuestions[currentIndex].ans, opts: currentQuestions[currentIndex].opts });
+  }
+  currentIndex++;
+  if (currentIndex >= currentQuestions.length) { showResult(); return; }
+  renderQuestion();
+  updateMeta();
+}
+
+function updateMeta() {
+  const total = currentQuestions.length;
+  const pct = total ? ((currentIndex / total) * 100) : 0;
+  document.getElementById('quiz-progress-bar').style.width = pct + '%';
+  document.getElementById('quiz-progress-label').textContent = `Câu ${Math.min(currentIndex+1,total)}/${total}`;
+  document.getElementById('quiz-score-label').textContent = `Điểm: ${score}`;
+}
+
+function showResult() {
+  document.getElementById('quiz-container').innerHTML = '';
+  const pct = Math.round((score / currentQuestions.length) * 100);
+  let msg = pct >= 80 ? '🎉 Xuất sắc! Bạn đã nắm vững kiến thức!' : pct >= 60 ? '👍 Khá tốt! Ôn thêm một chút nhé.' : '📚 Cần ôn tập thêm. Hãy đọc lại Wiki!';
+  const wrongItems = userAnswers.filter(a => a.chosen !== a.correct);
+  const resultDiv = document.getElementById('quiz-result');
+  resultDiv.classList.remove('hidden');
+  resultDiv.innerHTML = `
+    <div class="score-card">
+      <div class="score-ring">
+        <span class="score-num">${score}</span>
+        <span class="score-total">/ ${currentQuestions.length}</span>
+      </div>
+      <h3>${msg}</h3>
+      <p>Tỉ lệ đúng: <strong style="color:var(--gold)">${pct}%</strong></p>
+      ${wrongItems.length > 0 ? `<div style="text-align:left;width:100%;max-width:600px;margin:0 auto">
+        <div class="section-label" style="margin-top:0">Câu cần ôn lại</div>
+        ${wrongItems.map(a => `<div class="review-item wrong-item">
+          <div class="ri-mark">✗ Chưa đúng</div>
+          <div class="ri-q">${a.q}</div>
+          <div class="ri-a">✓ Đáp án đúng: ${a.opts[a.correct]}</div>
+        </div>`).join('')}
+      </div>` : '<div style="color:#86efac;font-weight:600;">✓ Bạn đã trả lời đúng tất cả!</div>'}
+    </div>`;
+  document.getElementById('quiz-progress-bar').style.width = '100%';
+}
+
+function restartQuiz() {
+  currentIndex = 0; score = 0; answered = false; userAnswers = [];
+  currentQuestions.sort(() => Math.random() - 0.5);
+  document.getElementById('quiz-result').classList.add('hidden');
+  renderQuestion();
+  updateMeta();
+}
+
+// ===== FLASHCARD LOGIC =====
+let fcIndex = 0;
+let fcFlipped = false;
+
+function renderFC() {
+  const fc = flashcards[fcIndex];
+  document.getElementById('fc-q').textContent = fc.q;
+  document.getElementById('fc-a').textContent = fc.a;
+  document.getElementById('fc-counter').textContent = `${fcIndex+1} / ${flashcards.length}`;
+  document.getElementById('fc-inner').style.transform = 'rotateY(0deg)';
+  fcFlipped = false;
+}
+
+function flipCard() {
+  fcFlipped = !fcFlipped;
+  document.getElementById('fc-inner').style.transform = fcFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+}
+
+function nextCard() {
+  fcIndex = (fcIndex + 1) % flashcards.length;
+  renderFC();
+}
+
+function prevCard() {
+  fcIndex = (fcIndex - 1 + flashcards.length) % flashcards.length;
+  renderFC();
+}
+
+// ===== ESSAY FILTER =====
+function filterEssay(type, btn) {
+  document.querySelectorAll('.essay-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.essay-card').forEach(card => {
+    if (type === 'all' || card.dataset.type === type) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function toggleAnswer(btn) {
+  const answer = btn.nextElementSibling;
+  const isVisible = answer.classList.contains('visible');
+  answer.classList.toggle('visible');
+  btn.textContent = isVisible ? '👁 Xem gợi ý đáp án' : '🙈 Ẩn gợi ý';
+}
+
+// Init
+currentQuestions = [...allQuestions].sort(() => Math.random() - 0.5);
+renderQuestion();
+updateMeta();
+renderFC();
+</script>
+</body>
+</html>
