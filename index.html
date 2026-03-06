@@ -705,6 +705,181 @@
   .essay-textarea:focus { outline: none; border-color: rgba(167,139,250,0.5); }
   .essay-textarea::placeholder { color: rgba(148,163,184,0.5); }
 
+  /* ===== ĐỀ MẪU SECTION ===== */
+  .exam-header {
+    background: linear-gradient(135deg, rgba(15,35,86,0.9), rgba(10,32,96,0.8));
+    border: 1px solid rgba(96,165,250,0.25);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .exam-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(37,99,235,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .exam-header .exam-school {
+    font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--blue-400); margin-bottom: 6px;
+  }
+  .exam-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900; color: white;
+    margin-bottom: 4px;
+  }
+  .exam-header .exam-sub {
+    font-size: 0.88rem; color: var(--blue-300); margin-bottom: 16px;
+  }
+  .exam-meta-row {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 14px;
+  }
+  .exam-meta-pill {
+    padding: 5px 16px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;
+    background: rgba(37,99,235,0.2); color: var(--blue-300);
+    border: 1px solid rgba(96,165,250,0.25);
+  }
+
+  .exam-question-block {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(96,165,250,0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    transition: border-color 0.2s;
+  }
+  .exam-question-block:hover { border-color: rgba(96,165,250,0.3); }
+
+  .exam-q-header {
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .exam-q-num {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .exam-q-num .num-circle {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-700), var(--blue-600));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 900; color: white;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.35);
+    flex-shrink: 0;
+  }
+  .exam-q-num .num-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--blue-400);
+  }
+  .exam-q-text {
+    font-size: 0.95rem; line-height: 1.75; color: var(--gray-100);
+  }
+  .exam-q-text strong { color: white; }
+
+  .exam-scenario {
+    margin: 16px 0 0;
+    background: rgba(255,255,255,0.04);
+    border-left: 4px solid var(--blue-500);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    font-size: 0.9rem; line-height: 1.75; color: var(--gray-100);
+  }
+  .exam-scenario .sc-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--blue-400); margin-bottom: 10px; display: block;
+  }
+  .exam-require {
+    margin-top: 16px; padding: 14px 18px;
+    background: rgba(240,192,64,0.07);
+    border: 1px solid rgba(240,192,64,0.2);
+    border-radius: 12px;
+    font-size: 0.88rem; line-height: 1.7; color: #fde68a;
+  }
+  .exam-require strong { color: var(--gold); }
+
+  .exam-answer {
+    padding: 28px;
+  }
+  .exam-answer-toggle {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px; cursor: pointer; user-select: none;
+  }
+  .exam-answer-toggle .toggle-bar {
+    flex: 1; height: 1px; background: rgba(96,165,250,0.15);
+  }
+  .exam-answer-toggle .toggle-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--blue-400);
+    white-space: nowrap;
+  }
+
+  .answer-section {
+    margin-bottom: 24px;
+  }
+  .answer-section-title {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .answer-section-title .ast-icon {
+    width: 32px; height: 32px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .ast-mindfulness { background: rgba(37,99,235,0.2); border: 1px solid rgba(96,165,250,0.3); }
+  .ast-yoga { background: rgba(20,184,166,0.15); border: 1px solid rgba(94,234,212,0.3); }
+  .ast-emotion { background: rgba(240,192,64,0.12); border: 1px solid rgba(240,192,64,0.25); }
+  .ast-q1 { background: rgba(168,85,247,0.15); border: 1px solid rgba(192,132,252,0.3); }
+
+  .answer-section-title h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700; color: white;
+  }
+  .answer-section-title .ast-sub {
+    font-size: 0.78rem; color: var(--blue-300);
+  }
+  .answer-body { padding-left: 42px; }
+  .answer-body p {
+    font-size: 0.9rem; line-height: 1.8; color: var(--gray-100);
+    margin-bottom: 10px;
+  }
+  .answer-body p:last-child { margin-bottom: 0; }
+  .answer-body strong { color: var(--blue-300); }
+  .answer-body .highlight { color: #5eead4; font-weight: 600; }
+  .answer-body .ref {
+    font-size: 0.78rem; color: var(--blue-400);
+    font-style: italic;
+  }
+
+  .answer-technique-row {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px;
+    padding-left: 42px;
+  }
+  .answer-technique-row .atag {
+    padding: 5px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 600;
+    background: rgba(37,99,235,0.2); color: var(--blue-300);
+    border: 1px solid rgba(96,165,250,0.25);
+  }
+  .answer-technique-row .atag-teal {
+    background: rgba(20,184,166,0.12); color: #5eead4;
+    border: 1px solid rgba(94,234,212,0.2);
+  }
+  .answer-technique-row .atag-gold {
+    background: rgba(240,192,64,0.1); color: #fde68a;
+    border: 1px solid rgba(240,192,64,0.2);
+  }
+  .answer-technique-row .atag-purple {
+    background: rgba(168,85,247,0.12); color: #c4b5fd;
+    border: 1px solid rgba(192,132,252,0.2);
+  }
+
+  .exam-divider {
+    height: 1px; background: rgba(96,165,250,0.1);
+    margin: 24px 0;
+  }
+
   .hidden { display: none; }
 </style>
 </head>
@@ -728,6 +903,7 @@
   <button class="tab-btn" onclick="showSection('quiz')">🧠 Luyện Quiz</button>
   <button class="tab-btn" onclick="showSection('classquiz')">📝 Quiz Lớp</button>
   <button class="tab-btn" onclick="showSection('essay')">✍️ Tự Luận & Tình Huống</button>
+  <button class="tab-btn" onclick="showSection('demazau')">📄 Đề Mẫu</button>
   <button class="tab-btn" onclick="showSection('flashcard')">⚡ Flashcard Nhanh</button>
 </div>
 
@@ -1566,6 +1742,327 @@
       <button class="btn btn-primary" id="cq-next-btn" style="display:none;" onclick="cqNext()">Câu Tiếp →</button>
     </div>
   </div>
+
+  <!-- ===== ĐỀ MẪU SECTION ===== -->
+  <div id="demazau" class="section">
+
+    <div class="exam-header">
+      <div class="exam-school">TLH068 · Chánh niệm, Yoga &amp; Sức khỏe tinh thần</div>
+      <h2>📄 Đề Mẫu – Bài Tập Cuối Kỳ</h2>
+      <p class="exam-sub">Thực hành ứng dụng kiến thức vào tình huống thực tiễn</p>
+      <div class="exam-meta-row">
+        <span class="exam-meta-pill">⏱ 60 phút</span>
+        <span class="exam-meta-pill">📊 2 câu hỏi</span>
+        <span class="exam-meta-pill">✍️ Tự luận</span>
+        <span class="exam-meta-pill">📚 Tài liệu đóng</span>
+      </div>
+    </div>
+
+    <!-- ====== CÂU 1 ====== -->
+    <div class="exam-question-block">
+      <div class="exam-q-header">
+        <div class="exam-q-num">
+          <div class="num-circle">1</div>
+          <span class="num-label">Câu hỏi 1 · Nhận diện kỹ thuật</span>
+        </div>
+        <p class="exam-q-text">
+          Kể tên <strong>một kỹ thuật thiền</strong> mà bạn có thể sử dụng để chuyển từ trạng thái <strong>"Doing Mode"</strong> (Làm) sang <strong>"Being Mode"</strong> (Hiện diện). Giải thích ngắn gọn tại sao kỹ thuật đó có thể tạo ra sự chuyển đổi này.
+        </p>
+      </div>
+
+      <div class="exam-answer">
+        <div class="exam-answer-toggle" onclick="this.nextElementSibling.classList.toggle('hidden')">
+          <div class="toggle-bar"></div>
+          <span class="toggle-label">👁 Xem bài giải mẫu</span>
+          <div class="toggle-bar"></div>
+        </div>
+
+        <div>
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon ast-q1">🎯</div>
+              <div>
+                <h4>Kỹ thuật: Three-Minute Breathing Space (3MB)</h4>
+                <span class="ast-sub">Segal, Williams &amp; Teasdale – MBCT</span>
+              </div>
+            </div>
+            <div class="answer-body">
+              <p><strong>3MB (Three-Minute Breathing Space)</strong> là kỹ thuật cốt lõi trong MBCT, được thiết kế đặc biệt để tạo khoảng dừng tỉnh thức giữa cuộc sống bận rộn. Kỹ thuật này gồm 3 bước:</p>
+            </div>
+            <div class="answer-technique-row">
+              <span class="atag atag-purple">A – Awareness: Nhận biết</span>
+              <span class="atag atag-purple">B – Breathing: Quy tụ về hơi thở</span>
+              <span class="atag atag-purple">E – Expanding: Mở rộng ra toàn thân</span>
+            </div>
+            <div class="answer-body">
+              <p><strong>Tại sao 3MB chuyển Doing → Being?</strong> Trong Doing Mode, tâm trí đang phân tích, đánh giá và cố gắng "sửa chữa" trải nghiệm — một vòng lặp tốn năng lượng và dễ dẫn đến overthinking. Bước <span class="highlight">A (Nhận biết)</span> giúp cá nhân dừng automatic pilot lại và quan sát trung lập trạng thái hiện tại mà không phán xét. Bước <span class="highlight">B (Quy tụ)</span> dùng hơi thở như điểm neo để đưa sự chú ý về hiện tại — đây chính là thời điểm chuyển từ "làm" sang "là". Bước <span class="highlight">E (Mở rộng)</span> mở rộng nhận biết ra toàn thân thay vì thu hẹp vào vòng suy nghĩ, củng cố trạng thái Being Mode.</p>
+              <p><strong>Cơ chế sinh lý:</strong> Quy tụ về hơi thở kích hoạt hệ đối giao cảm (parasympathetic), giảm hoạt hóa amygdala và Default Mode Network (DMN) — vùng não liên quan đến rumination và suy nghĩ lang thang. Khi DMN giảm hoạt động, tâm trí thoát khỏi vòng phân tích và chuyển sang hiện diện tỉnh thức. <span class="ref">(Brewer et al., 2011; Segal et al., MBCT)</span></p>
+              <p><strong>Các kỹ thuật dưới đây cũng là đáp án hợp lệ</strong> — mỗi kỹ thuật có cơ chế riêng nhưng đều dẫn đến cùng một kết quả: thoát khỏi vòng phân tích của Doing Mode và quay về trạng thái hiện diện.</p>
+            </div>
+          </div>
+
+          <div class="exam-divider"></div>
+
+          <!-- KỸ THUẬT 2: MINDFUL BREATHING -->
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon ast-q1">💨</div>
+              <div>
+                <h4>Kỹ thuật 2: Mindful Breathing (Thiền Hơi Thở)</h4>
+                <span class="ast-sub">Nền tảng của mọi kỹ thuật MBCT</span>
+              </div>
+            </div>
+            <div class="answer-technique-row">
+              <span class="atag atag-purple">Neo sự chú ý vào hơi thở</span>
+              <span class="atag atag-purple">Không điều khiển, không phán xét</span>
+              <span class="atag atag-purple">Thoát khỏi vòng lặp rumination</span>
+            </div>
+            <div class="answer-body">
+              <p><strong>Mindful Breathing</strong> là nền tảng của mọi kỹ thuật mindfulness khác trong MBCT. Người thực hành chú ý đến hơi thở <em>như nó đang là</em> — không cố kiểm soát nhịp thở, không đánh giá hơi thở "tốt" hay "không tốt", chỉ đơn giản là quan sát.</p>
+              <p><strong>Tại sao chuyển Doing → Being?</strong> Trong Doing Mode, tâm trí đang "làm việc": phân tích vấn đề, tìm lý do, đánh giá kết quả. Khi chú ý được đưa về hơi thở — một đối tượng luôn ở hiện tại — tâm trí không còn nguyên liệu để vận hành Doing Mode. Hơi thở là điểm neo ổn định nhất giúp cá nhân <span class="highlight">nhận ra khi tâm trí đang rời khỏi hiện tại</span> và từ từ quay trở lại. Mỗi khi nhận ra tâm trí lang thang và nhẹ nhàng đưa chú ý về lại — đó chính là khoảnh khắc Being Mode được thực hành. <span class="ref">(MBCT – Segal, Williams &amp; Teasdale)</span></p>
+              <p><strong>Cơ chế sinh lý bổ sung:</strong> Thở chậm, có chú ý kích hoạt hệ đối giao cảm, giảm hoạt hóa amygdala (vùng xử lý sợ hãi) và tăng hoạt động vỏ não trước trán (prefrontal cortex) — khu vực liên quan đến lựa chọn có ý thức và quan sát tâm trí. Đây là cơ sở để hơi thở trở thành "cửa ngõ" tiếp cận Being Mode nhanh và hiệu quả nhất.</p>
+            </div>
+          </div>
+
+          <div class="exam-divider"></div>
+
+          <!-- KỸ THUẬT 3: BODY SCAN -->
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon ast-q1">🔎</div>
+              <div>
+                <h4>Kỹ thuật 3: Body Scan (Quét Cơ Thể)</h4>
+                <span class="ast-sub">Chuyển chú ý từ suy nghĩ → cảm giác thân thể</span>
+              </div>
+            </div>
+            <div class="answer-technique-row">
+              <span class="atag atag-purple">Quét từ chân → đầu</span>
+              <span class="atag atag-purple">Quan sát không phán xét</span>
+              <span class="atag atag-purple">Giảm cognitive fusion</span>
+            </div>
+            <div class="answer-body">
+              <p><strong>Body Scan</strong> là kỹ thuật đưa sự chú ý lần lượt qua từng vùng cơ thể — từ bàn chân, mắt cá, bắp chân... lên đến đỉnh đầu — với thái độ <em>quan sát trung lập</em>, không cố thay đổi bất cứ điều gì. Với mỗi vùng, người thực hành chỉ đơn giản nhận biết: <em>"ở đây đang có cảm giác gì? nóng, lạnh, căng, nhói, hay không có gì đặc biệt?"</em></p>
+              <p><strong>Tại sao chuyển Doing → Being?</strong> Doing Mode vận hành chủ yếu trong ngôn ngữ và khái niệm trừu tượng (suy nghĩ, phân tích, so sánh). Body Scan buộc tâm trí chuyển sang ngôn ngữ <span class="highlight">cảm giác cụ thể và hiện tại</span> — không thể "phân tích về tương lai" hay "so sánh với người khác" khi đang thực sự chú ý vào cảm giác bàn chân. Đây là bước chuyển rõ ràng nhất từ trừu tượng (Doing) sang cụ thể-hiện tại (Being).</p>
+              <p><strong>Vai trò trị liệu đặc biệt:</strong> Body Scan phát triển <em>body awareness</em> — khả năng nhận ra tín hiệu stress sớm trên cơ thể trước khi chúng leo thang thành lo âu hoặc căng thẳng nặng. Đây là cơ chế nhận biết sớm quan trọng trong MBCT, giúp cá nhân can thiệp từ giai đoạn đầu của vòng lặp thân–tâm. <span class="ref">(Bài 3 – MBCT; b3_ky_thuat_mindfulness)</span></p>
+            </div>
+          </div>
+
+          <div class="exam-divider"></div>
+
+          <!-- KỸ THUẬT 4: CHOICELESS AWARENESS -->
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon ast-q1">🌐</div>
+              <div>
+                <h4>Kỹ thuật 4: Choiceless Awareness (Nhận Biết Mở Rộng)</h4>
+                <span class="ast-sub">Giai đoạn cao hơn – quan sát mà không chọn lựa đối tượng</span>
+              </div>
+            </div>
+            <div class="answer-technique-row">
+              <span class="atag atag-purple">Quan sát tất cả trải nghiệm</span>
+              <span class="atag atag-purple">Không bám vào đối tượng nào</span>
+              <span class="atag atag-purple">Nhận ra vô thường của suy nghĩ</span>
+            </div>
+            <div class="answer-body">
+              <p><strong>Choiceless Awareness</strong> là hình thức thực hành trong đó người học quan sát tất cả các trải nghiệm đang diễn ra — cảm giác cơ thể, suy nghĩ, âm thanh, cảm xúc — mà <em>không chọn bám vào bất kỳ đối tượng nào</em>. Khác với Mindful Breathing (chọn hơi thở làm điểm neo) hay Body Scan (chọn cơ thể), Choiceless Awareness mở rộng "ống kính" ra toàn bộ trường trải nghiệm.</p>
+              <p><strong>Tại sao chuyển Doing → Being?</strong> Doing Mode cần một "vấn đề" để phân tích và một "mục tiêu" để hướng tới. Choiceless Awareness <span class="highlight">không cung cấp đối tượng nào để Doing Mode bám vào</span> — người thực hành chỉ đơn giản là "ở cùng" với bất cứ điều gì đang xảy ra. Suy nghĩ <em>"mình không dẻo"</em> xuất hiện → được quan sát như một đám mây trôi qua → không cần phân tích, không cần bác bỏ, tự nhiên tan biến. Đây là hiện thân đầy đủ nhất của Being Mode.</p>
+              <p><strong>Lưu ý khi sử dụng:</strong> Choiceless Awareness phù hợp hơn với người đã có nền tảng thực hành. Với người mới hoặc đang có lo âu cao, nên bắt đầu với 3MB hoặc Mindful Breathing trước vì có điểm neo rõ ràng hơn. <span class="ref">(Bài 3 – MBCT; b3_ky_thuat_mindfulness)</span></p>
+            </div>
+          </div>
+
+          <div class="exam-divider"></div>
+
+          <!-- BẢNG SO SÁNH -->
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon" style="background:rgba(37,99,235,0.2);border:1px solid rgba(96,165,250,0.3);">📊</div>
+              <div>
+                <h4>Tóm tắt – So sánh 4 kỹ thuật</h4>
+                <span class="ast-sub">Chọn kỹ thuật phù hợp theo ngữ cảnh</span>
+              </div>
+            </div>
+            <div class="answer-body" style="padding-left:0;">
+              <div style="overflow-x:auto;">
+                <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+                  <thead>
+                    <tr style="background:rgba(37,99,235,0.15);">
+                      <th style="padding:10px 14px;text-align:left;color:var(--blue-300);font-weight:700;border-bottom:1px solid rgba(96,165,250,0.2);">Kỹ thuật</th>
+                      <th style="padding:10px 14px;text-align:left;color:var(--blue-300);font-weight:700;border-bottom:1px solid rgba(96,165,250,0.2);">Điểm neo</th>
+                      <th style="padding:10px 14px;text-align:left;color:var(--blue-300);font-weight:700;border-bottom:1px solid rgba(96,165,250,0.2);">Cơ chế chuyển mode</th>
+                      <th style="padding:10px 14px;text-align:left;color:var(--blue-300);font-weight:700;border-bottom:1px solid rgba(96,165,250,0.2);">Phù hợp nhất khi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                      <td style="padding:10px 14px;color:white;font-weight:600;">3MB</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Hơi thở (3 phút)</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Dừng automatic pilot, tạo khoảng dừng tức thì</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Giữa cuộc sống bận rộn, cần can thiệp nhanh</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02);">
+                      <td style="padding:10px 14px;color:white;font-weight:600;">Mindful Breathing</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Hơi thở (dài hơn)</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Neo chú ý vào hiện tại, giảm DMN và rumination</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Muốn ổn định tâm trí, thực hành hàng ngày</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                      <td style="padding:10px 14px;color:white;font-weight:600;">Body Scan</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Cảm giác cơ thể</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Chuyển từ ngôn ngữ trừu tượng → cảm giác cụ thể</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Căng thẳng cơ thể, mất kết nối thân–tâm</td>
+                    </tr>
+                    <tr style="background:rgba(255,255,255,0.02);">
+                      <td style="padding:10px 14px;color:white;font-weight:600;">Choiceless Awareness</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Toàn bộ trải nghiệm</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Không cho Doing Mode đối tượng để bám vào</td>
+                      <td style="padding:10px 14px;color:var(--gray-100);">Người có nền tảng, muốn thực hành sâu hơn</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== CÂU 2 ====== -->
+    <div class="exam-question-block">
+      <div class="exam-q-header">
+        <div class="exam-q-num">
+          <div class="num-circle">2</div>
+          <span class="num-label">Câu hỏi 2 · Phân tích tình huống &amp; can thiệp</span>
+        </div>
+
+        <div class="exam-scenario">
+          <span class="sc-label">📖 Tình Huống</span>
+          Một sinh viên đi tập yoga. Trong quá trình tập, sinh viên này cố gắng làm theo động tác của người khác nhưng làm không được, dẫn đến bị đau cơ. Từ đó nảy sinh suy nghĩ: <em>"Mình không dẻo, mình không làm được đâu"</em>. Sinh viên cảm thấy nản tập, nản chí và mất động lực.
+        </div>
+
+        <div class="exam-require">
+          <strong>Yêu cầu:</strong> Nếu là nhà tâm lý / người hỗ trợ, bạn nên làm gì để giúp thân chủ trên theo <strong>ba góc độ</strong>:<br>
+          ① Chánh niệm (Mindfulness) &nbsp;·&nbsp; ② Yoga &nbsp;·&nbsp; ③ Cảm xúc tích cực
+        </div>
+      </div>
+
+      <div class="exam-answer">
+        <div class="exam-answer-toggle" onclick="this.nextElementSibling.classList.toggle('hidden')">
+          <div class="toggle-bar"></div>
+          <span class="toggle-label">👁 Xem bài giải mẫu</span>
+          <div class="toggle-bar"></div>
+        </div>
+
+        <div>
+
+          <!-- PHÂN TÍCH VẤN ĐỀ -->
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);">🔍</div>
+              <div>
+                <h4>Phân tích cơ chế tâm lý</h4>
+                <span class="ast-sub">Nhận diện vòng lặp thân–tâm đang xảy ra</span>
+              </div>
+            </div>
+            <div class="answer-body">
+              <p>Sinh viên đang rơi vào <strong>vòng lặp thân–tâm tiêu cực</strong>: Đau cơ (cơ thể) → suy nghĩ so sánh và phán xét bản thân <em>"mình không dẻo, không làm được"</em> (nhận thức) → cảm xúc thất vọng, nản chí (cảm xúc) → mất động lực, muốn bỏ tập (hành vi né tránh) → không có cơ hội để cơ thể và tâm trí phục hồi → stress tăng.</p>
+              <p>Suy nghĩ <em>"mình không làm được đâu"</em> là biểu hiện của <strong>cognitive fusion</strong> — đồng nhất hoàn toàn với suy nghĩ tiêu cực như thể đó là sự thật khách quan. Kết hợp với việc cố gắng làm theo người khác, đây là Doing Mode điển hình trong yoga: đặt mục tiêu thành tích, so sánh, phán xét — hoàn toàn trái với tinh thần mindful movement.</p>
+            </div>
+          </div>
+
+          <div class="exam-divider"></div>
+
+          <!-- GÓC ĐỘ 1: CHÁNH NIỆM -->
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon ast-mindfulness">🪷</div>
+              <div>
+                <h4>Góc độ 1: Chánh niệm (Mindfulness – MBCT)</h4>
+                <span class="ast-sub">Phát triển Decentering · Phá vỡ Cognitive Fusion</span>
+              </div>
+            </div>
+            <div class="answer-technique-row">
+              <span class="atag">① 3MB – Three-Minute Breathing Space</span>
+              <span class="atag">② Decentering</span>
+              <span class="atag">③ Body Scan nhẹ</span>
+            </div>
+            <div class="answer-body">
+              <p><strong>① Three-Minute Breathing Space (3MB):</strong> Ngay khi sinh viên nhận ra mình đang nản lòng, hướng dẫn dừng lại và thực hành 3MB. Bước A (Nhận biết) — hỏi "ngay lúc này mình đang cảm thấy gì trong cơ thể?", không đánh giá. Bước B (Quy tụ) — đưa chú ý về hơi thở, sử dụng hơi thở như điểm neo thay vì tiếp tục vòng suy nghĩ tiêu cực. Bước E (Mở rộng) — mở rộng nhận biết ra toàn thân, thoát khỏi vòng phân tích "mình kém hơn người".</p>
+              <p><strong>② Decentering – Tách rời khỏi suy nghĩ:</strong> Giúp sinh viên nhận ra suy nghĩ <em>"mình không làm được"</em> chỉ là <strong>sự kiện tâm trí</strong>, không phải sự thật khách quan. Thực hành chuyển từ <em>"tôi là cảm xúc"</em> → <em>"tôi có suy nghĩ rằng mình không làm được"</em>. Khi đặt khoảng cách giữa bản thân và suy nghĩ, sức ảnh hưởng của nó lên cảm xúc và hành vi giảm đi rõ rệt. <span class="ref">(Teasdale et al., 1995 – cơ chế trung tâm của MBCT)</span></p>
+              <p><strong>③ Body Scan nhẹ:</strong> Hướng sự chú ý vào vùng cơ đang đau với thái độ <strong>không phán xét</strong> — quan sát cảm giác "đây là căng, ấm, khó chịu" thay vì diễn giải "mình yếu". Body scan giúp sinh viên kết nối trở lại với tín hiệu cơ thể và chuyển từ Doing Mode (phân tích lỗi) sang Being Mode (quan sát trung lập).</p>
+            </div>
+          </div>
+
+          <div class="exam-divider"></div>
+
+          <!-- GÓC ĐỘ 2: YOGA -->
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon ast-yoga">🧘</div>
+              <div>
+                <h4>Góc độ 2: Yoga – Mindful Movement</h4>
+                <span class="ast-sub">Relaxing Flow · Nguyên tắc không phán xét · Tôn trọng giới hạn</span>
+              </div>
+            </div>
+            <div class="answer-technique-row">
+              <span class="atag atag-teal">① Relaxing Flow</span>
+              <span class="atag atag-teal">② Điều chỉnh tư thế (Modification)</span>
+              <span class="atag atag-teal">③ Savasana</span>
+              <span class="atag atag-teal">④ Nguyên tắc Mindful Movement</span>
+            </div>
+            <div class="answer-body">
+              <p><strong>① Chuyển sang Relaxing Flow:</strong> Thay vì tiếp tục ép cơ thể vào các tư thế khó, hướng dẫn sinh viên chuyển sang chuỗi <strong>Relaxing Flow</strong> (Cat-Cow, Child's Pose, Forward Fold) — được thiết kế để làm dịu hệ thần kinh, không đòi hỏi độ dẻo cao, giúp sinh viên lấy lại cảm giác an toàn sinh lý và tự tin trong thực hành. Relaxing Flow kích hoạt hệ đối giao cảm, giảm mức lo âu và tạo lại nền tảng để tiếp tục.</p>
+              <p><strong>② Điều chỉnh tư thế (Modification):</strong> Giải thích rằng việc điều chỉnh tư thế theo khả năng cơ thể mình là <strong>biểu hiện của nhận biết và tự chăm sóc</strong> — không phải thất bại. Đây là nguyên tắc cốt lõi của mindful movement: tôn trọng giới hạn cơ thể, không so sánh với người khác, không nhấn mạnh thành tích. Hướng dẫn dùng block, gối hoặc giảm biên độ chuyển động để tư thế an toàn và có ý nghĩa trị liệu hơn.</p>
+              <p><strong>③ Savasana – Tích hợp và Buông bỏ:</strong> Kết thúc buổi tập bằng Savasana — tư thế "không làm" — để hệ thần kinh chuyển sang tiếp nhận và phục hồi. Savasana không chỉ là nghỉ ngơi mà là thực hành chánh niệm trị liệu: cho phép tất cả nỗ lực được buông xuống, cơ thể được nghe thấy mà không bị thúc ép. Kết hợp Body Scan trong Savasana để tích hợp thân–tâm sau vận động.</p>
+              <p><strong>④ Tái định hướng mục tiêu Yoga:</strong> Phân biệt rõ vận động tỉnh thức và thể dục thông thường. Trong mindful movement, mục tiêu không phải là độ dẻo hay sao chép tư thế của người khác, mà là <span class="highlight">chất lượng hiện diện, kết nối chuyển động–hơi thở–tâm trí</span>. Trình tự đúng của tác động thần kinh trong bài học là: Căng → Dịu → Vững → Tích hợp — sinh viên đang bỏ qua giai đoạn "Dịu" khi cố ép bản thân.</p>
+            </div>
+          </div>
+
+          <div class="exam-divider"></div>
+
+          <!-- GÓC ĐỘ 3: CẢM XÚC TÍCH CỰC -->
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon ast-emotion">✨</div>
+              <div>
+                <h4>Góc độ 3: Cảm xúc tích cực</h4>
+                <span class="ast-sub">Self-Compassion · Loving-Kindness · Reframing tích cực</span>
+              </div>
+            </div>
+            <div class="answer-technique-row">
+              <span class="atag atag-gold">① Self-Compassion (Lòng tự bi)</span>
+              <span class="atag atag-gold">② Loving-Kindness Meditation</span>
+              <span class="atag atag-gold">③ Reframing nhận thức</span>
+            </div>
+            <div class="answer-body">
+              <p><strong>① Self-Compassion – Lòng tự bi:</strong> Hướng dẫn sinh viên nhận ra rằng cảm giác nản lòng khi gặp khó khăn là <strong>trải nghiệm chung của con người</strong> (common humanity) — không phải dấu hiệu của sự yếu kém cá nhân. Thực hành lòng tự bi (self-compassion): thay vì tự trách <em>"mình không làm được"</em>, hãy tự hỏi <em>"nếu bạn mình gặp tình huống này, mình sẽ nói gì với bạn?"</em> và áp dụng chính thái độ đó cho bản thân. Đây là nền tảng của trắc ẩn (compassion) bắt đầu từ bên trong.</p>
+              <p><strong>② Loving-Kindness Meditation (Thiền Tâm Từ):</strong> Thực hành ngắn — bắt đầu từ <em>metta</em> hướng đến bản thân: <em>"Mong tôi được an lành. Mong tôi được khoẻ mạnh. Mong tôi được bình an với chính mình."</em> Thiền tâm từ kết hợp với tư thế yoga mở tim (chest opener) giúp nuôi dưỡng cảm xúc tích cực, đối nghịch với sự tự phán xét và nản chí. Bằng chứng cho thấy thiền tâm từ làm tăng positive affect và giảm self-criticism. <span class="ref">(Bài 7 – TLH068)</span></p>
+              <p><strong>③ Reframing nhận thức – Tái định nghĩa thành công:</strong> Giúp sinh viên chuyển góc nhìn: thay vì đánh giá buổi tập dựa trên độ dẻo và khả năng sao chép tư thế, hãy đánh giá dựa trên <span class="highlight">chất lượng hiện diện và sự tự chăm sóc</span>. Thực tế, việc dừng lại khi cơ đau và điều chỉnh tư thế là thành công — đó là nhận biết và tôn trọng cơ thể. Sự chuyển dịch này giúp sinh viên tìm lại động lực từ bên trong thay vì từ sự so sánh với người khác.</p>
+            </div>
+          </div>
+
+          <div class="exam-divider"></div>
+
+          <!-- TỔNG KẾT -->
+          <div class="answer-section">
+            <div class="answer-section-title">
+              <div class="ast-icon" style="background:rgba(37,99,235,0.2);border:1px solid rgba(96,165,250,0.3);">📋</div>
+              <div>
+                <h4>Tổng kết – Tích hợp ba góc độ</h4>
+                <span class="ast-sub">Ba lớp can thiệp bổ sung lẫn nhau</span>
+              </div>
+            </div>
+            <div class="answer-body">
+              <p>Ba góc độ không hoạt động độc lập mà bổ trợ nhau trong một tiến trình liên tục: <strong>Chánh niệm</strong> tạo khoảng dừng và phát triển decentering — giúp sinh viên thoát khỏi cognitive fusion và nhìn suy nghĩ tiêu cực như "sự kiện tâm trí". <strong>Yoga mindful</strong> điều chỉnh cơ thể về trạng thái an toàn sinh lý qua Relaxing Flow và Savasana — xử lý trực tiếp lớp thân thể trong vòng lặp thân–tâm. <strong>Cảm xúc tích cực</strong> xây dựng lại nền tảng nội tâm qua self-compassion và thiền tâm từ — chuyển hoá thái độ với bản thân từ phán xét sang trắc ẩn.</p>
+              <p>Thông điệp cốt lõi cần truyền đến sinh viên: <span class="highlight">Yoga không phải là cuộc thi độ dẻo — mà là cuộc trở về với chính mình.</span></p>
+            </div>
+          </div>
+
+        </div><!-- end answer body -->
+      </div><!-- end exam-answer -->
+    </div><!-- end câu 2 -->
+
+  </div><!-- end demazau section -->
 
 </div><!-- end main -->
 
