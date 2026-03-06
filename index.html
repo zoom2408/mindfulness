@@ -726,6 +726,7 @@
 <div class="nav-tabs">
   <button class="tab-btn active" onclick="showSection('wiki')">📚 Wiki Kiến Thức</button>
   <button class="tab-btn" onclick="showSection('quiz')">🧠 Luyện Quiz</button>
+  <button class="tab-btn" onclick="showSection('classquiz')">📝 Quiz Lớp</button>
   <button class="tab-btn" onclick="showSection('essay')">✍️ Tự Luận & Tình Huống</button>
   <button class="tab-btn" onclick="showSection('flashcard')">⚡ Flashcard Nhanh</button>
 </div>
@@ -903,11 +904,11 @@
           </div>
           <div class="compare-grid">
             <div class="compare-box">
-              <h5>Tâm trí Tự Động (Reactive)</h5>
+              <h5>Tâm Trí Tự Động (Reactive)</h5>
               <p>Automatic pilot, bị kích hoạt vô thức, hành vi theo thói quen cũ, không có khoảng dừng.</p>
             </div>
             <div class="compare-box">
-              <h5>Tâm trí Phản Ứng (Responsive)</h5>
+              <h5>Tâm Trí Có Ý Thức (Responsive)</h5>
               <p>Nhận ra, dừng lại, quan sát, lựa chọn cách phản ứng phù hợp với giá trị cá nhân.</p>
             </div>
           </div>
@@ -1534,6 +1535,38 @@
     </div><!-- end essay-grid -->
   </div><!-- end essay section -->
 
+  <!-- ===== CLASS QUIZ SECTION ===== -->
+  <div id="classquiz" class="section">
+    <div class="quiz-top">
+      <h2>📝 Quiz Lớp</h2>
+      <div class="quiz-meta">
+        <span class="badge badge-blue" id="cq-meta">Câu <span id="cq-cur">1</span> / <span id="cq-total">42</span></span>
+        <span class="badge badge-gold">Điểm: <span id="cq-score">0</span></span>
+      </div>
+    </div>
+
+    <div class="cat-filter">
+      <button class="cat-btn active" onclick="cqFilterCat('all',this)">Tất Cả</button>
+      <button class="cat-btn" onclick="cqFilterCat('movement',this)">Vận Động</button>
+      <button class="cat-btn" onclick="cqFilterCat('breath',this)">Hơi Thở</button>
+      <button class="cat-btn" onclick="cqFilterCat('mbct',this)">MBCT & Cảm Xúc</button>
+      <button class="cat-btn" onclick="cqFilterCat('stress',this)">Stress & TK</button>
+      <button class="cat-btn" onclick="cqFilterCat('tf',this)">Đúng / Sai</button>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="cq-progress" style="width:0%"></div>
+    </div>
+
+    <div id="cq-question-wrap"></div>
+    <div id="cq-result" class="hidden"></div>
+
+    <div class="quiz-actions" id="cq-actions">
+      <button class="btn btn-outline" id="cq-prev-btn" onclick="cqPrev()">← Trước</button>
+      <button class="btn btn-primary" id="cq-next-btn" style="display:none;" onclick="cqNext()">Câu Tiếp →</button>
+    </div>
+  </div>
+
 </div><!-- end main -->
 
 <script>
@@ -1793,11 +1826,232 @@ function toggleAnswer(btn) {
   btn.textContent = isVisible ? '👁 Xem gợi ý đáp án' : '🙈 Ẩn gợi ý';
 }
 
+// ===== CLASS QUIZ =====
+const classQuestions = [
+  { cat:'movement', q:'Trong tiến trình bài học, trình tự đúng của tác động thần kinh là:', opts:['Thư giãn - kích hoạt - căng thẳng','Căng - dịu - vững - tích hợp','Kích hoạt - Thư giãn - mệt','Nghĩ - vận động - căng'], ans:1 },
+  { cat:'movement', q:'Vì sao trong mindful movement, việc điều chỉnh tư thế được khuyến khích?', opts:['Vì đó là biểu hiện của nhận biết và tự chăm sóc','Vì tư thế không quan trọng','Để tránh chấn thương thể chất','Để cá nhân hóa bài tập'], ans:0 },
+  { cat:'movement', q:'Tác động thần kinh chính của các chuyển động chậm, đồng bộ với hơi thở là:', opts:['Ức chế hệ thần kinh trung ương','Kích thích phản xạ vận động','Tăng hoạt hóa giao cảm','Tăng hoạt hóa đối giao cảm'], ans:3 },
+  { cat:'movement', q:'Điểm khác biệt cốt lõi giữa vận động có ý thức và vận động thể chất thông thường là:', opts:['Chất lượng chú ý và thái độ không phán xét','Số lượng và độ khó của tư thế','Thời gian thực hành','Mức tiêu hao năng lượng'], ans:0 },
+  { cat:'movement', q:'Điều nào sau đây phản ánh đúng tinh thần của mindful movement trong MBCT?', opts:['Càng vận động nhiều càng tốt','Thay đổi cảm xúc ngay lập tức','Đạt trạng thái thư giãn sâu','Điều hòa thần kinh để hỗ trợ nhận thức'], ans:3 },
+  { cat:'movement', q:'Trong Grounding Flow, việc thực hành thăng bằng có ý nghĩa tâm lý quan trọng nhất là:', opts:['Tăng sự tập trung thị giác','Rèn luyện cơ chân','Học cách ở lại với bất ổn vừa phải','Giảm căng thẳng cơ học'], ans:2 },
+  { cat:'movement', q:'Trong MBCT, vận động có ý thức được xem là "cửa vào chánh niệm" vì:', opts:['Ít yêu cầu về lý thuyết','Thay thế hoàn toàn thiền tĩnh','Giúp người học neo chú ý vào trải nghiệm thân thể cụ thể','Dễ tổ chức trong lớp học'], ans:2 },
+  { cat:'movement', q:'Chuỗi Relaxing Flow được đặt trước Grounding Flow chủ yếu nhằm:', opts:['Giúp người học quen với yoga','Giảm mệt cơ','Chuẩn bị về mặt sinh lý và thần kinh','Tăng tính đa dạng bài học'], ans:2 },
+  { cat:'movement', q:'Trong mindful movement, "không làm" trong Savasana có ý nghĩa gì?', opts:['Nghỉ ngơi hoàn toàn','Hiện diện tỉnh thức mà không can thiệp','Buông bỏ trải nghiệm','Không cần chú ý'], ans:1 },
+  { cat:'movement', q:'Ý nghĩa sâu xa của vận động có ý thức trong giáo dục sức khỏe tinh thần là:', opts:['Thay thế các phương pháp trị liệu','Giúp người học học cách ở lại với chính mình','Dạy người học các bài tập','Tăng sự linh hoạt cơ thể'], ans:1 },
+  { cat:'breath', q:'Trong hệ thống Yoga cổ điển, Pranayama được đặt ở vị trí nào, vì sao?', opts:['Song song với Asana vì đều là thực hành thân thể','Sau Dhyana vì hơi thở là kết quả của thiền','Trước Asana vì hơi thở chuẩn bị cho vận động','Giữa Asana và Dhyana vì giúp ổn định thân tâm trước thiền'], ans:3 },
+  { cat:'breath', q:'Phản ứng như chóng mặt nhẹ hoặc cảm xúc trỗi lên khi mới thực hành thở thường cho thấy điều gì?', opts:['Cần ngừng học phần','Có vấn đề tâm lý nghiêm trọng','Thực hành sai hoàn toàn','Cơ thể đang phản hồi với sự thay đổi sinh lý'], ans:3 },
+  { cat:'breath', q:'Thở luân phiên mũi được giới thiệu trong học phần chủ yếu nhằm:', opts:['Tăng sức bền phổi','Cân bằng hệ thần kinh và tăng chú ý','Kích hoạt năng lượng mạnh','Giải phóng cảm xúc dồn nén'], ans:1 },
+  { cat:'breath', q:'Đặc điểm chung của các kỹ thuật thở năng lượng là gì?', opts:['Nhịp thở chậm và kéo dài','Kích hoạt hệ thần kinh giao cảm','Luôn an toàn cho mọi đối tượng','Tập trung vào thì thở ra'], ans:1 },
+  { cat:'breath', q:'Nguyên lý "không cần thay đổi cảm xúc trước" trong thực hành hơi thở hàm ý điều gì?', opts:['Hơi thở thay thế cho trị liệu','Tác động sinh lý có thể dẫn đến thay đổi cảm xúc','Cảm xúc sẽ tự biến mất','Cảm xúc không quan trọng'], ans:1 },
+  { cat:'breath', q:'Mục tiêu sâu xa nhất của việc học kỹ thuật thở trong học phần này là gì?', opts:['Phát triển năng lực tự chăm sóc và điều chỉnh','Thành thạo nhiều kỹ thuật','Kiểm soát hoàn toàn cảm xúc','Đạt trạng thái thiền sâu'], ans:0 },
+  { cat:'breath', q:'Trong học phần này, ranh giới quan trọng nhất của thực hành hơi thở là gì?', opts:['Không được nhắm mắt','Không được thực hành một mình','Không xem hơi thở như một hình thức trị liệu','Không được thực hành ngoài lớp'], ans:2 },
+  { cat:'breath', q:'Vì sao hơi thở được xem là cửa ngõ hiệu quả để tác động đến cảm xúc?', opts:['Vì hơi thở liên quan đến tư duy','Vì hơi thở luôn tạo cảm giác dễ chịu','Vì hơi thở có mối liên hệ hai chiều với hệ thần kinh tự động','Vì hơi thở dễ kiểm soát hơn cảm xúc'], ans:2 },
+  { cat:'mbct', q:'Khái niệm "automatic pilot" trong MBCT đề cập đến điều gì?', opts:['Trạng thái phản ứng tự động ngoài ý thức','Thói quen suy nghĩ tích cực','Khả năng tập trung cao độ','Sự kiểm soát hành vi có chủ đích'], ans:0 },
+  { cat:'mbct', q:'Khái niệm "decentering" trong MBCT nói đến điều gì?', opts:['Tạo khoảng cách với người khác','Phân tích logic cảm xúc','Loại bỏ suy nghĩ tiêu cực','Nhìn suy nghĩ và cảm xúc như hiện tượng tâm trí'], ans:3 },
+  { cat:'mbct', q:'Mục tiêu lâu dài của STOP trong MBCT là gì?', opts:['Tránh các tình huống căng thẳng','Làm suy yếu phản ứng tự động','Loại bỏ thói quen cũ','Luôn hành động đúng'], ans:1 },
+  { cat:'mbct', q:'Một người dùng STOP với mục tiêu làm cho cảm xúc khó chịu biến mất càng nhanh càng tốt. Theo MBCT, cách sử dụng này có nguy cơ gì?', opts:['Làm giảm hiệu quả của STOP','Không phù hợp với môi trường học tập','Biến STOP thành công cụ kiểm soát và né tránh','Khiến cảm xúc mạnh hơn'], ans:2 },
+  { cat:'mbct', q:'Thông điệp cốt lõi nhất trong MBCT về điều hòa cảm xúc là gì?', opts:['Con người cần kiểm soát cảm xúc tốt hơn','Bình tĩnh là mục tiêu cuối cùng','Nhận biết giúp mở rộng khả năng lựa chọn','Cảm xúc tiêu cực cần được thay đổi'], ans:2 },
+  { cat:'mbct', q:'Trong MBCT, điều hòa cảm xúc được hiểu đúng nhất là gì?', opts:['Kiểm soát để cảm xúc tiêu cực không xuất hiện','Thay đổi nội dung suy nghĩ tiêu cực','Duy trì trạng thái bình tĩnh liên tục','Thay đổi mối quan hệ với cảm xúc và suy nghĩ'], ans:3 },
+  { cat:'mbct', q:'STOP trong MBCT được xem là loại thực hành nào?', opts:['Thực hành vi mô trong đời sống hằng ngày','Thực hành thư giãn dài','Thực hành thay đổi niềm tin','Thực hành nhận thức nâng cao'], ans:0 },
+  { cat:'mbct', q:'Trong kỹ thuật STOP, bước T – "Take a breath" có vai trò chính là gì?', opts:['Kiểm soát nhịp thở','Làm dịu cảm xúc ngay lập tức','Phân tán sự chú ý khỏi vấn đề','Neo sự chú ý vào hiện tại'], ans:3 },
+  { cat:'mbct', q:'Một người nhận được email phê bình và lập tức muốn phản hồi gay gắt. Vai trò cốt lõi của STOP trong tình huống này là gì?', opts:['Giúp loại bỏ cảm xúc tức giận','Tránh đối diện với người gửi email','Tạo khoảng dừng trước khi hành động','Giúp phản hồi đúng hơn'], ans:2 },
+  { cat:'mbct', q:'Trong bối cảnh môn học, "tự điều chỉnh" được hiểu đúng nhất là:', opts:['Kiểm soát cảm xúc bằng ý chí','Luôn giữ trạng thái bình tĩnh','Nhận diện trạng thái thân tâm và điều chỉnh phản ứng một cách linh hoạt','Áp dụng kỹ thuật loại bỏ cảm xúc tiêu cực'], ans:2 },
+  { cat:'stress', q:'Trong trạng thái phản ứng tự động, vùng não nào thường chiếm ưu thế?', opts:['Vỏ não vận động','Hạch hạnh nhân (Amygdala)','Vỏ não trước trán (Prefrontal Cortex)','Thân não'], ans:1 },
+  { cat:'stress', q:'Khi stress, hơi thở thường có xu hướng nào sau đây?', opts:['Nhanh và nông hơn','Chậm và sâu hơn','Ổn định và đều đặn','Ngừng lại hoàn toàn'], ans:0 },
+  { cat:'stress', q:'Hệ thần kinh giao cảm (Sympathetic Nervous System) có vai trò chính nào?', opts:['Tăng tiêu hóa và miễn dịch','Kích hoạt cơ thể để đối phó với mối đe dọa','Phục hồi và thư giãn','Gây buồn ngủ'], ans:1 },
+  { cat:'stress', q:'Hormone nào sau đây liên quan trực tiếp đến việc duy trì năng lượng trong stress?', opts:['Oxytocin','Serotonin','Dopamine','Cortisol'], ans:3 },
+  { cat:'stress', q:'Theo bài học, khoảng dừng trong stress có ý nghĩa gì?', opts:['Cho phép vòng lặp thân tâm tự duy trì','Tạo điều kiện lựa chọn phản ứng thay vì phản xạ tự động','Giúp suy nghĩ logic hơn ngay lập tức','Giúp trì hoãn hành động'], ans:1 },
+  { cat:'stress', q:'Theo mô hình đánh giá stress của Lazarus, yếu tố nào quyết định cảm xúc stress mạnh hay nhẹ?', opts:['Tuổi tác','Mức độ nghiêm trọng khách quan của tình huống','Sự đánh giá mối đe dọa và nguồn lực đối phó','Tính cách bẩm sinh'], ans:2 },
+  { cat:'stress', q:'Hệ thần kinh tự động (ANS) chủ yếu điều khiển chức năng nào sau đây?', opts:['Khả năng ra quyết định có ý thức','Suy nghĩ logic và trí nhớ','Cảm xúc xã hội','Các chức năng vô thức như nhịp tim và hơi thở'], ans:3 },
+  { cat:'stress', q:'Giảm hoạt hóa Default Mode Network (DMN) có ý nghĩa gì trong quản lý stress?', opts:['Giảm trí nhớ dài hạn','Giảm suy nghĩ lặp lại và tự trách','Giảm khả năng suy nghĩ','Tăng phản ứng sinh tồn'], ans:1 },
+  { cat:'stress', q:'Stress cấp tính (acute stress) thường có đặc điểm nào?', opts:['Luôn gây hại cho sức khỏe','Luôn dẫn đến trầm cảm','Kéo dài nhiều tháng','Ngắn hạn và cơ thể có khả năng phục hồi'], ans:3 },
+  { cat:'tf', q:'Yoga và chánh niệm chỉ tạo cảm giác thư giãn chủ quan, không tạo thay đổi sinh học đo lường được.', opts:['Sai – Yoga/mindfulness tạo thay đổi sinh học đo lường được (GABA, cortisol, cấu trúc não)','Đúng'], ans:0 },
+  { cat:'tf', q:'Hơi thở thường bị ảnh hưởng sớm khi cơ thể rơi vào trạng thái stress.', opts:['Sai','Đúng – Hơi thở là một trong những tín hiệu sinh lý đầu tiên bị ảnh hưởng'], ans:1 },
+  { cat:'tf', q:'Stress chỉ ảnh hưởng đến tâm lý, không ảnh hưởng đến cơ thể.', opts:['Sai – Stress ảnh hưởng toàn diện thân–tâm (cortisol, nhịp tim, cơ bắp...)','Đúng'], ans:0 },
+  { cat:'tf', q:'Rumination giúp con người giải quyết stress hiệu quả hơn bằng cách suy nghĩ kỹ vấn đề.', opts:['Sai – Rumination duy trì và làm trầm trọng thêm stress, không giải quyết được','Đúng'], ans:0 },
+  { cat:'tf', q:'Stress luôn bắt đầu từ suy nghĩ tiêu cực của con người.', opts:['Đúng','Sai – Stress có thể bắt đầu từ sinh lý (mệt mỏi, bệnh tật) trước khi có suy nghĩ tiêu cực'], ans:1 },
+];
+
+const cqCatLabels = { all:'Tất Cả', movement:'Vận Động', breath:'Hơi Thở', mbct:'MBCT & Cảm Xúc', stress:'Stress & TK', tf:'Đúng / Sai' };
+
+let cqIndex = 0;
+let cqScore = 0;
+let cqAnswered = false;
+let cqShuffled = [];
+let cqHistory = {};  // index → {chosen, correct}
+
+function cqFilterCat(cat, btn) {
+  document.querySelectorAll('#classquiz .cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  cqShuffled = cat === 'all' ? [...classQuestions] : classQuestions.filter(q => q.cat === cat);
+  cqShuffled = cqShuffled.sort(() => Math.random() - 0.5);
+  cqIndex = 0; cqScore = 0; cqAnswered = false; cqHistory = {};
+  document.getElementById('cq-result').classList.add('hidden');
+  document.getElementById('cq-actions').style.display = 'flex';
+  cqRender();
+}
+
+function cqShuffle() {
+  cqShuffled = [...cqShuffled].sort(() => Math.random() - 0.5);
+  cqIndex = 0; cqScore = 0; cqAnswered = false; cqHistory = {};
+  document.getElementById('cq-result').classList.add('hidden');
+  document.getElementById('cq-actions').style.display = 'flex';
+  cqRender();
+}
+
+function cqRender() {
+  const total = cqShuffled.length;
+  document.getElementById('cq-cur').textContent = cqIndex + 1;
+  document.getElementById('cq-total').textContent = total;
+  document.getElementById('cq-score').textContent = cqScore;
+  document.getElementById('cq-progress').style.width = (((cqIndex) / total) * 100) + '%';
+  document.getElementById('cq-result').classList.add('hidden');
+
+  const q = cqShuffled[cqIndex];
+  cqAnswered = cqHistory[cqIndex] !== undefined;
+  const isTF = q.opts.length === 2;
+  const catLabel = cqCatLabels[q.cat] || q.cat;
+
+  const letters = ['A','B','C','D'];
+  let optsHTML = q.opts.map((o, i) => {
+    let cls = 'option-btn';
+    let letterCls = '';
+    if (cqHistory[cqIndex] !== undefined) {
+      const {chosen, correct} = cqHistory[cqIndex];
+      if (i === correct) { cls += ' correct'; letterCls = ''; }
+      else if (i === chosen && chosen !== correct) { cls += ' wrong'; }
+    }
+    return `<button class="${cls}" id="cq-opt-${i}" onclick="cqAnswer(${i})" ${cqAnswered ? 'disabled' : ''}>
+      <span class="option-letter">${letters[i]}</span>
+      <span>${o}</span>
+    </button>`;
+  }).join('');
+
+  let expHTML = '';
+  if (cqHistory[cqIndex] !== undefined) {
+    const {chosen, correct} = cqHistory[cqIndex];
+    expHTML = `<div class="explanation">
+      ${chosen === correct
+        ? `<strong style="color:var(--correct);">✓ Chính xác!</strong> Đáp án: <strong>${q.opts[correct]}</strong>`
+        : `<strong style="color:var(--wrong);">✗ Chưa đúng.</strong> Đáp án đúng: <strong>${q.opts[correct]}</strong>`}
+    </div>`;
+  }
+
+  const isLast = cqIndex === cqShuffled.length - 1;
+  const nextLabel = isLast ? 'Xem Kết Quả 🎉' : 'Câu Tiếp →';
+
+  document.getElementById('cq-question-wrap').innerHTML = `
+    <div class="question-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+        <div class="question-num">Câu ${cqIndex + 1} / ${total}</div>
+        <div style="display:flex;gap:8px;">
+          <span class="badge badge-blue" style="font-size:0.72rem;">${catLabel}</span>
+          ${isTF ? '<span class="badge" style="background:rgba(168,85,247,0.15);color:#c4b5fd;border:1px solid rgba(167,139,250,0.3);font-size:0.72rem;">Đúng / Sai</span>' : ''}
+        </div>
+      </div>
+      <p class="question-text">${q.q}</p>
+      <div class="options">${optsHTML}</div>
+      ${expHTML}
+    </div>`;
+
+  // Update nav buttons
+  const prevBtn = document.getElementById('cq-prev-btn');
+  const nextBtn = document.getElementById('cq-next-btn');
+  prevBtn.disabled = cqIndex === 0;
+  prevBtn.style.opacity = cqIndex === 0 ? '0.3' : '1';
+  nextBtn.style.display = cqAnswered ? 'inline-flex' : 'none';
+  nextBtn.textContent = nextLabel;
+}
+
+function cqAnswer(chosen) {
+  if (cqAnswered) return;
+  cqAnswered = true;
+  const q = cqShuffled[cqIndex];
+  const correct = q.ans;
+  if (chosen === correct) cqScore++;
+  cqHistory[cqIndex] = { chosen, correct };
+  document.getElementById('cq-score').textContent = cqScore;
+
+  q.opts.forEach((_, i) => {
+    const btn = document.getElementById('cq-opt-' + i);
+    btn.disabled = true;
+    if (i === correct) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+
+  const isCorrect = chosen === correct;
+  const expDiv = document.createElement('div');
+  expDiv.className = 'explanation';
+  expDiv.innerHTML = isCorrect
+    ? `<strong style="color:var(--correct);">✓ Chính xác!</strong> Đáp án: <strong>${q.opts[correct]}</strong>`
+    : `<strong style="color:var(--wrong);">✗ Chưa đúng.</strong> Đáp án đúng: <strong>${q.opts[correct]}</strong>`;
+  document.querySelector('#cq-question-wrap .options').after(expDiv);
+
+  const isLast = cqIndex === cqShuffled.length - 1;
+  const nextBtn = document.getElementById('cq-next-btn');
+  nextBtn.style.display = 'inline-flex';
+  nextBtn.textContent = isLast ? 'Xem Kết Quả 🎉' : 'Câu Tiếp →';
+}
+
+function cqNext() {
+  if (cqIndex < cqShuffled.length - 1) { cqIndex++; cqRender(); }
+  else cqShowResult();
+}
+
+function cqPrev() {
+  if (cqIndex > 0) { cqIndex--; cqRender(); }
+}
+
+function cqShowResult() {
+  const total = cqShuffled.length;
+  const pct = Math.round((cqScore / total) * 100);
+  const stars = pct >= 80 ? '🌟🌟🌟' : pct >= 60 ? '🌟🌟' : '🌟';
+  const msg = pct >= 80 ? 'Xuất sắc! Bạn nắm rất vững nội dung.' : pct >= 60 ? 'Khá tốt! Ôn lại các câu sai nhé.' : 'Cần ôn thêm. Xem lại Wiki và thử lại!';
+
+  document.getElementById('cq-question-wrap').innerHTML = '';
+  document.getElementById('cq-progress').style.width = '100%';
+  document.getElementById('cq-actions').style.display = 'none';
+
+  // build wrong items review
+  let reviewHTML = '';
+  cqShuffled.forEach((q, i) => {
+    if (cqHistory[i] && cqHistory[i].chosen !== cqHistory[i].correct) {
+      reviewHTML += `<div class="review-item wrong-item">
+        <div class="ri-mark">✗ Câu ${i+1}</div>
+        <div class="ri-q">${q.q}</div>
+        <div class="ri-a">✓ Đáp án đúng: ${q.opts[q.ans]}</div>
+      </div>`;
+    }
+  });
+
+  const res = document.getElementById('cq-result');
+  res.classList.remove('hidden');
+  res.innerHTML = `
+    <div class="score-card">
+      <div class="score-ring">
+        <span class="score-num">${cqScore}</span>
+        <span class="score-total">/ ${total}</span>
+      </div>
+      <h3>${pct}% ${stars}</h3>
+      <p>${msg}</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="cqShuffle()">🔄 Làm Lại (Xáo Câu)</button>
+        <button class="btn btn-outline" onclick="cqFilterCat('all', document.querySelector('#classquiz .cat-btn'))">Đặt Lại Bộ Lọc</button>
+      </div>
+    </div>
+    ${reviewHTML ? '<div style="margin-top:24px;"><div class="question-num" style="margin-bottom:16px;">📋 Câu Làm Sai – Ôn Lại</div>' + reviewHTML + '</div>' : ''}`;
+}
+
 // Init
 currentQuestions = [...allQuestions].sort(() => Math.random() - 0.5);
+
 renderQuestion();
 updateMeta();
 renderFC();
+
+// Init class quiz
+cqShuffled = [...classQuestions];
+cqRender();
 </script>
 </body>
 </html>
